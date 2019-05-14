@@ -1,0 +1,22 @@
+* {
+    font-family: 'Stylish', sans-serif;
+    box-sizing: border-box;
+}
+
+.active {
+    border-radius: 10px;
+    background: rgb(35, 13, 133);
+    color: black;
+}
+
+.login:hover,
+.login:active,
+.signup:hover,
+.signup:active,
+.home:hover,
+.home:active {
+    font-style: bold;
+    border-radius: 10px;
+    background: rgb(35, 13, 133);
+    color: white;
+}

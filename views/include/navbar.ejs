@@ -1,0 +1,16 @@
+<nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1"><a href="/" class="text-decoration-none text-light">TVMR</a></span>
+    <div class="navbar navbar-expand" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="home nav-item <%= (path=='/')?'active':''%>">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="login nav-item <%= (path=='/form/login')?'active':''%>">
+                <a class="nav-link" href="/form/login">Login</a>
+            </li>
+            <li class="signup nav-item <%= (path=='/form/signup')?'active':''%>">
+                <a class="nav-link" href="/form/signup">Sign Up</a>
+            </li>
+        </ul>
+    </div>
+</nav>

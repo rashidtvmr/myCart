@@ -1,0 +1,128 @@
+<%- include('include/header.ejs',{pageTitle:pageTitle}) %>
+<link rel="stylesheet" href="/css/signup.css">
+</head>
+
+<body>
+    <%- include('include/navbar.ejs',{path:path}) %>
+    <div class="container">
+        <div class="row">
+            <div
+                class="login-form d-flex flex-column justify-content-center offset-1 col-10 col-md-6 p-2 bg-dark offset-sm-1 offset-md-3 shadow">
+                <form method="POST" action="/signup" name="signup">
+                    <p class="font-weight-bolder text-light">Register</p>
+                    <div class="mt-5 mx-3 mx-md-5">
+                        <div class="forEmail shadow-lg">
+                            <i class="fas fa-envelope"></i>
+                            <input type="text" placeholder="E-mail" name="email" onkeyup="emailInput(event)">
+                        </div>
+                        <div class="email-alert alert-sm alert-danger">Invalid Email</div>
+                    </div>
+                    <div class="mt-5 mx-3 mx-md-5">
+                        <div class="forPass shadow-lg">
+                            <i class="fas fa-key"></i>
+                            <input type="password" name="password" placeholder="Password" onkeyup="passInput(event)">
+                        </div>
+                        <div class="pass-alert alert-sm alert-danger">Invalid Password</div>
+                        <div class="text-light"> * Password must contain atleast One Uppercase,One lowercase,One special
+                            character,One number</div>
+                    </div>
+                    <div class="submit-btn my-5 mx-3 mx-md-5">
+                        <input type="submit" class="submit-btn btn w-100 btn-primary px-5 badge-pill" name="submit"
+                            value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
+        const passwordPattern = /^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/;
+        let emailAlert = document.querySelector('.email-alert');
+        let passAlert = document.querySelector('.pass-alert');
+        let emailBox = document.querySelector('.forEmail');
+        let email = document.querySelector('.forEmail input');
+        let pass = document.querySelector('.forPass input');
+        let passwordBox = document.querySelector('.forPass');
+        let submitButton = document.querySelector('.submit-btn');
+        let isValid = false;
+        let isEmail = false;
+        let isPassword = false;
+        document.signup.submit.disabled = true;
+
+        //
+        let char = 0;
+        const myText = "E-Mail";
+        let txtLen = myText.length;
+
+
+        (async function typeIt() {
+            timeOut = setTimeout(function () {
+                char++;
+                var type = myText.substring(0, char);
+                email.placeholder = type + '|';
+                typeIt();
+
+                if (char == txtLen) {
+                    //output.innerHTML=output.value.slice(0, -2)); // remove the '|'
+                    clearTimeout(timeOut);
+                }
+
+            }, 100);
+        }());
+        myText = "Password";
+        txtLen = myText.length;
+        (async function typeIt() {
+            timeOut = setTimeout(function () {
+                char++;
+                var type = myText.substring(0, char);
+                pass.placeholder = type + '|';
+                typeIt();
+
+                if (char == txtLen) {
+                    //output.innerHTML=output.value.slice(0, -2)); // remove the '|'
+                    clearTimeout(timeOut);
+                }
+
+            }, 100);
+        }());
+
+        //
+
+
+
+
+        emailInput = (e) => {
+
+            showAlert(emailBox, emailAlert);
+            isEmail = emailPattern.test(e.target.value);
+            hideAlert(isEmail, emailBox, emailAlert, e);
+            isValid = isEmail && isPassword;
+            validate(isValid);
+        }
+
+        passInput = (e) => {
+            showAlert(passwordBox, passAlert);
+            isPassword = passwordPattern.test(e.target.value);
+            hideAlert(isPassword, passwordBox, passAlert, e);
+            isValid = isEmail && isPassword;
+            validate(isValid);
+        }
+        showAlert = (Box, Alert) => {
+            Alert.style.display = "block";
+            Box.style.border = "1px solid red";
+            document.signup.submit.disabled = true;
+        }
+        hideAlert = (validator, Box, Alert, e) => {
+            if (validator) {
+                Box.style.border = "none";
+                e.target.style.background = "none";
+                Alert.style.display = "none";
+            }
+        }
+        validate = (isValid) => {
+            if (isValid) {
+                document.signup.submit.disabled = false;
+            }
+        }
+    </script>
+    <%- include('include/footer.ejs') %>

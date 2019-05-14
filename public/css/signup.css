@@ -1,0 +1,42 @@
+.login-form {
+    margin-top: 7%;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.forEmail,
+.forPass {
+    background: azure;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 7px;
+    transition: all 0.01s ease;
+}
+
+.forEmail i,
+.forPass i {
+    padding: 10px;
+}
+
+.forEmail input,
+.forPass input {
+    border: none;
+    background: none;
+    flex: 1;
+    outline: none;
+}
+
+.email-alert,
+.pass-alert {
+
+    display: none;
+    border-radius: 7px;
+}
+
+:disabled {
+    cursor: not-allowed;
+}
+
+.submit-btn input[type='submit'] {}
