@@ -9,9 +9,15 @@
         <% result.forEach(user=>{ %>
             <li>Your E-mail is-> <%= user.email%></li>
             <li>Your Password is-> <%= user.password%></li>
+            
             <br>
          <% }); %>   
         </ul>
     </pre>
-
+    <script src="/js/main.js"></script>
+    <script>
+        let output = document.getElementById("output");
+        typeIt("My Bar", output, 400); //(string,targetElement,time(in sec))
+    </script>
     <%- include('include/footer.ejs')%>
+</body>

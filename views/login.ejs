@@ -27,13 +27,14 @@
                             character,One number and minimum 8</div>
                     </div>
                     <div class="submit-btn my-5 mx-3 mx-md-5">
-                        <input type="submit" onclick="authenticate()"
-                            class="submit-btn btn w-100 btn-primary px-5 badge-pill" name="submit" value="Submit">
+                        <input type="submit" class="submit-btn btn w-100 btn-primary px-5 badge-pill" name="submit"
+                            value="Submit">
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script src="/js/main.js"></script>
     <script>
         const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
         const passwordPattern = /^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/;
@@ -41,7 +42,7 @@
         let passAlert = document.querySelector('.pass-alert');
         let emailBox = document.querySelector('.forEmail');
         let passwordBox = document.querySelector('.forPass');
-        let submitButton = document.querySelector('.submit-btn');
+        // let submitButton = document.querySelector('.submit-btn');
         let isValid = false;
         let isEmail = false;
         let isPassword = false;
@@ -49,53 +50,57 @@
 
 
 
-        function emailInput(e) {
-            emailAlert.style.display = "block";
-            document.login.submit.disabled = true;
-            emailBox.style.border = "1px solid red";
-            document.login.submit.disabled = true;
+        // emailInput = (e) => {
+        //     showALert(emailBox,emailAlert);
+
+        //     // emailAlert.style.display = "block";
+        //     // document.login.submit.disabled = true;
+        //     // emailBox.style.border = "1px solid red";
+        //     isEmail = emailPattern.test(e.target.value);
+        //     // if (isEmail) {
+        //     //     emailBox.style.border = "none";
+        //     //     emailAlert.style.display = "none";
+        //         hideAlert(isEmail, emailBox, emailAlert, e);
+        //         // e.target.style.background = "none";
+        //     // }
+        //     isValid = isEmail && isPassword;
+        //     // if (isValid === 'true') {
+        //     //     document.login.submit.disabled = false;
+        //     // }
+        //     validate(isValid);
+        // }
+
+        // function passInput(e) {
+        //     passAlert.style.display = "block";
+        //     passwordBox.style.border = "1px solid red";
+        //     document.login.submit.disabled = true;
+        //     isPassword = passwordPattern.test(e.target.value);
+
+        //     if (isPassword) {
+        //         passwordBox.style.border = "none";
+        //         passAlert.style.display = "none";
+        //     }
+
+        //     isValid = isEmail && isPassword;
+        //     if (isValid) {
+        //         document.login.submit.disabled = false;
+        //     }
+        // }
+        emailInput = (e) => {
+
+            showAlert(emailBox, emailAlert, 'login');
             isEmail = emailPattern.test(e.target.value);
-            if (isEmail) {
-                emailBox.style.border = "none";
-                emailAlert.style.display = "none";
-                // e.target.style.background = "none";
-            }
+            hideAlert(isEmail, emailBox, emailAlert, e);
             isValid = isEmail && isPassword;
-            if (isValid === 'true') {
-                document.login.submit.disabled = false;
-            }
+            validate(isValid, 'login');
         }
 
-        function passInput(e) {
-            passAlert.style.display = "block";
-            passwordBox.style.border = "1px solid red";
-            document.login.submit.disabled = true;
+        passInput = (e) => {
+            showAlert(passwordBox, passAlert, 'login');
             isPassword = passwordPattern.test(e.target.value);
-
-            if (isPassword) {
-                passwordBox.style.border = "none";
-                passAlert.style.display = "none";
-            }
-
+            hideAlert(isPassword, passwordBox, passAlert, e);
             isValid = isEmail && isPassword;
-            if (isValid) {
-                document.login.submit.disabled = false;
-            }
-        }
-        authenticate = () => {
-            var xhttp;
-            xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log(this.responseText);
-                    passAlert.style.display = "block";
-                    passwordBox.style.border = "1px solid red";
-                    document.login.submit.disabled = true;
-                    passAlert.innerHTML = this.responseText;
-                }
-            };
-            xhttp.open("POST", "/login", true);
-            xhttp.send();
+            validate(isValid, 'login');
         }
     </script>
     <%- include('include/footer.ejs') %>

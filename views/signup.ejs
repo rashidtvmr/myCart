@@ -34,6 +34,7 @@
             </div>
         </div>
     </div>
+    <script src="/js/main.js"></script>
     <script>
         const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
         const passwordPattern = /^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/;
@@ -53,36 +54,19 @@
 
         emailInput = (e) => {
 
-            showAlert(emailBox, emailAlert);
+            showAlert(emailBox, emailAlert, 'signup');
             isEmail = emailPattern.test(e.target.value);
             hideAlert(isEmail, emailBox, emailAlert, e);
             isValid = isEmail && isPassword;
-            validate(isValid);
+            validate(isValid, 'signup');
         }
 
         passInput = (e) => {
-            showAlert(passwordBox, passAlert);
+            showAlert(passwordBox, passAlert, 'signup');
             isPassword = passwordPattern.test(e.target.value);
             hideAlert(isPassword, passwordBox, passAlert, e);
             isValid = isEmail && isPassword;
-            validate(isValid);
-        }
-        showAlert = (Box, Alert) => {
-            Alert.style.display = "block";
-            Box.style.border = "1px solid red";
-            document.signup.submit.disabled = true;
-        }
-        hideAlert = (validator, Box, Alert, e) => {
-            if (validator) {
-                Box.style.border = "none";
-                e.target.style.background = "none";
-                Alert.style.display = "none";
-            }
-        }
-        validate = (isValid) => {
-            if (isValid) {
-                document.signup.submit.disabled = false;
-            }
+            validate(isValid, 'signup');
         }
     </script>
     <%- include('include/footer.ejs') %>
