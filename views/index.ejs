@@ -3,5 +3,15 @@
 <body style="text-align:center">
     <%- include('include/navbar.ejs',{path:path})%>
     <p>Currently Registered Users</p>
+    <pre>
+        <p><%=message%></p>
+        <ul>
+        <% result.forEach(user=>{ %>
+            <li>Your E-mail is-> <%= user.email%></li>
+            <li>Your Password is-> <%= user.password%></li>
+            <br>
+         <% }); %>   
+        </ul>
+    </pre>
 
     <%- include('include/footer.ejs')%>

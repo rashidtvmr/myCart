@@ -8,7 +8,7 @@
         <div class="row">
             <div
                 class="login-form d-flex flex-column justify-content-center offset-1 col-10 col-md-6 p-2 bg-dark offset-sm-1 offset-md-3 shadow-lg">
-                <form method="get" action="/login" name="login">
+                <form name="login" action="/login" method="POST">
                     <p class="font-weight-bolder text-light">Login</p>
                     <div class="mt-5 mx-3 mx-md-5">
                         <div class="forEmail shadow-lg">
@@ -27,8 +27,8 @@
                             character,One number and minimum 8</div>
                     </div>
                     <div class="submit-btn my-5 mx-3 mx-md-5">
-                        <input type="submit" class="submit-btn btn w-100 btn-primary px-5 badge-pill" name="submit"
-                            value="Submit">
+                        <input type="submit" onclick="authenticate()"
+                            class="submit-btn btn w-100 btn-primary px-5 badge-pill" name="submit" value="Submit">
                     </div>
                 </form>
             </div>
@@ -46,6 +46,8 @@
         let isEmail = false;
         let isPassword = false;
         document.login.submit.disabled = true;
+
+
 
         function emailInput(e) {
             emailAlert.style.display = "block";
@@ -79,6 +81,21 @@
             if (isValid) {
                 document.login.submit.disabled = false;
             }
+        }
+        authenticate = () => {
+            var xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    passAlert.style.display = "block";
+                    passwordBox.style.border = "1px solid red";
+                    document.login.submit.disabled = true;
+                    passAlert.innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("POST", "/login", true);
+            xhttp.send();
         }
     </script>
     <%- include('include/footer.ejs') %>

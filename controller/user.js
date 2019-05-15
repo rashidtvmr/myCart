@@ -17,40 +17,75 @@ module.exports.registerUser = (req, res, next) => {
   const user = new Users(email, pass);
   user.save();
   res.status(200).render("signup", {
-    pageTitle: "signup",
-    path: "/signup"
+    pageTitle: "Register",
+    path: "/signup",
+    message: "Registered Successfully"
   });
 };
 module.exports.getLogin = (req, res, next) => {
   const email = req.body.email;
   const pass = req.body.password;
-  Users.fetchUsers(users => {
-    //console.log(users);
-    const result = users.filter(user => {
-      return user.email == email && user.password == pass;
+  Users.getUser(email, pass)
+    .then(result => {
+      if (result) {
+        console.log("success =>" + result);
+        res.status(200).render("index", {
+          pageTitle: "carTVMR",
+          path: "/",
+          result: [result],
+          message: `Welocome ${result.email}`
+        });
+      } else if (!result) {
+        console.log("Failed");
+        res.sendStatus(403);
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(403);
     });
-    console.log("result" + result);
+  // Users.fetchUsers(res => {
 
-    if (users) {
-      res.status(200).render("Main/main", {
-        pageTitle: "Main",
-        path: "/login"
-      });
-    } else {
-      res.status(404).render("login", {
-        pageTitle: "Invalid User",
-        path: "/something"
-      });
-    }
-  });
+  // });
+  // Users.fetchUsers(users => {
+  //   //console.log(users);
+  //   const result = users.filter(user => {
+  //     return user.email == email && user.password == pass;
+  //   });
+  //   console.log("result" + result);
+
+  //   if (users) {
+  //     res.status(200).render("Main/main", {
+  //       pageTitle: "carTVMR",
+  //       path: "/login"
+  //     });
+  //   } else {
+  //     res.status(404).render("login", {
+  //       pageTitle: "Invalid User",
+  //       path: "/something"
+  //     });
+  //   }
+  // });
+  // res.render("index", {
+  //   pageTitle: "Home",
+  //   path: "/something",
+  //   result: "Logged in"
+  // });
 };
 module.exports.getIndex = (req, res, next) => {
-  const users = Users.fetchUsers(user => user);
-  console.log(users);
-  res.render("index", {
-    pageTitle: "Home",
-    path: "/"
-  });
+  Users.fetchUsers()
+    .then(users => {
+      console.log("User Email" + users[0].email);
+      res.render("index", {
+        pageTitle: "carTVMR",
+        path: "/",
+        result: users,
+        message: `Welocome to CARTvmr`
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
 module.exports.get404 = (req, res, next) => {
   res.status(404).render("404", {

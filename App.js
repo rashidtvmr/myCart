@@ -1,6 +1,8 @@
+const dbConnect = require("./data/User").dbConnect;
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+
 const PORT = process.env.PORT || 8080;
 
 app.set("view engine", "ejs");
@@ -18,10 +20,13 @@ app.use(express.static("./public"));
 app.use("/form/login", loginRoute);
 app.use("/form/signup", signupRoute);
 app.use("/signup", controller.registerUser);
-app.use("/login", controller.getLogin);
+app.post("/login", controller.getLogin);
 app.get("/", controller.getIndex);
 app.use(controller.get404);
 
+dbConnect(() => {
+  console.log("DB inside App.js");
+});
 app.listen(PORT, () => {
   console.log(`Listening on PORT:${PORT}`);
 });

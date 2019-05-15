@@ -49,46 +49,6 @@
         let isPassword = false;
         document.signup.submit.disabled = true;
 
-        //
-        let char = 0;
-        const myText = "E-Mail";
-        let txtLen = myText.length;
-
-
-        (async function typeIt() {
-            timeOut = setTimeout(function () {
-                char++;
-                var type = myText.substring(0, char);
-                email.placeholder = type + '|';
-                typeIt();
-
-                if (char == txtLen) {
-                    //output.innerHTML=output.value.slice(0, -2)); // remove the '|'
-                    clearTimeout(timeOut);
-                }
-
-            }, 100);
-        }());
-        myText = "Password";
-        txtLen = myText.length;
-        (async function typeIt() {
-            timeOut = setTimeout(function () {
-                char++;
-                var type = myText.substring(0, char);
-                pass.placeholder = type + '|';
-                typeIt();
-
-                if (char == txtLen) {
-                    //output.innerHTML=output.value.slice(0, -2)); // remove the '|'
-                    clearTimeout(timeOut);
-                }
-
-            }, 100);
-        }());
-
-        //
-
-
 
 
         emailInput = (e) => {
