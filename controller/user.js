@@ -3,7 +3,8 @@ const bcrypt = require("bcrypt");
 module.exports.getLoginForm = (req, res, next) => {
   res.render("login", {
     pageTitle: "Login",
-    path: "/form/login"
+    path: "/form/login",
+    message: false
   });
 };
 module.exports.getSignupForm = (req, res, next) => {
@@ -60,25 +61,35 @@ module.exports.getLogin = (req, res, next) => {
   const pass = req.body.password;
   Users.getUser(email, pass)
     .then(result => {
-      if (!result) {
-        console.log("email or password doesnt exist");
-        res.redirect("/form/login");
-      }
       return bcrypt.compare(pass, result.password);
     })
     .then(auth => {
+      console.log(auth);
+      console.log(!auth);
       if (auth) {
-        console.log("success =>" + result);
+        console.log("success =>" + auth);
         res.status(200).render("index", {
           pageTitle: "carTVMR",
           path: "/",
-          result: [result],
-          message: `Welocome ${result.email}`
+          result: [auth],
+          message: `Welocome ${auth.email}`
+        });
+      }
+      if (!auth) {
+        res.render("login", {
+          pageTitle: "Login",
+          path: "/form/login",
+          message: "Invalid email or password"
         });
       }
     })
     .catch(err => {
       console.log(err);
+      res.render("login", {
+        pageTitle: "Login",
+        path: "/form/login",
+        message: "E-mail id doesnt exist"
+      });
     });
 };
 
