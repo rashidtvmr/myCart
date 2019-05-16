@@ -4,6 +4,7 @@
 
 <body>
     <%- include('include/navbar.ejs',{path:path}) %>
+
     <div class="container">
         <%if(message){%>
         <%=message%>
@@ -39,6 +40,7 @@
     </div>
     <script src="/js/main.js"></script>
     <script>
+         typeIt("Register", output, 200);
         const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
         const passwordPattern = /^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/;
         let emailAlert = document.querySelector('.email-alert');
