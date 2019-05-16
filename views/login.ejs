@@ -46,6 +46,8 @@
         let passAlert = document.querySelector('.pass-alert');
         let emailBox = document.querySelector('.forEmail');
         let passwordBox = document.querySelector('.forPass');
+        let email= document.querySelector('.forEmail input');
+        let password= document.querySelector('.forPass input');
         // let submitButton = document.querySelector('.submit-btn');
         let isValid = false;
         let isEmail = false;
@@ -93,16 +95,16 @@
         emailInput = (e) => {
 
             showAlert(emailBox, emailAlert, 'login');
-            isEmail = emailPattern.test(e.target.value);
-            hideAlert(isEmail, emailBox, emailAlert, e);
+            isEmail = emailPattern.test(email.value);
+            hideAlert(isEmail, emailBox, emailAlert);
             isValid = isEmail && isPassword;
             validate(isValid, 'login');
         }
 
         passInput = (e) => {
             showAlert(passwordBox, passAlert, 'login');
-            isPassword = passwordPattern.test(e.target.value);
-            hideAlert(isPassword, passwordBox, passAlert, e);
+            isPassword = passwordPattern.test(password.value);
+            hideAlert(isPassword, passwordBox, passAlert);
             isValid = isEmail && isPassword;
             validate(isValid, 'login');
         }

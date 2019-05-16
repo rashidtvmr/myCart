@@ -5,7 +5,8 @@
 }
 
 .forEmail,
-.forPass {
+.forPass,
+.forPass2 {
     background: azure;
     height: 30px;
     display: flex;
@@ -16,12 +17,14 @@
 }
 
 .forEmail i,
-.forPass i {
+.forPass i,
+.forPass2 i {
     padding: 10px;
 }
 
 .forEmail input,
-.forPass input {
+.forPass input,
+.forPass2 input {
     border: none;
     background: none;
     flex: 1;
@@ -29,7 +32,8 @@
 }
 
 .email-alert,
-.pass-alert {
+.pass-alert,
+.pass-alert2 {
 
     display: none;
     border-radius: 7px;

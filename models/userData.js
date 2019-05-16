@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const bcrypt = require("bcrypt");
 const getdb = require("../data/User").getdb;
-const myDb = getdb();
+// const myDb = getdb();
 module.exports = class Users {
   constructor(email, pass) {
     this.email = email;
@@ -14,22 +14,9 @@ module.exports = class Users {
   //   console.log("Executed:" + pass);
   //   return await bcrypt.hash(this.password, 12);
   // }
-  static Check(email) {
+  save() {
     const myDb = getdb();
     return myDb
-      .collection("New-Users")
-      .find({ email: email })
-      .next()
-      .then(alreadyExist => {
-        return alreadyExist;
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-  save() {
-    const myDb2 = getdb();
-    return myDb2
       .collection("New-Users")
       .insertOne(this)
       .then(result => {

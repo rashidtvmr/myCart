@@ -25,10 +25,9 @@ showAlert = (Box, Alert, formName) => {
   Box.style.border = "1px solid red";
   document[formName].submit.disabled = true;
 };
-hideAlert = (validator, Box, Alert, e) => {
+hideAlert = (validator, Box, Alert) => {
   if (validator) {
     Box.style.border = "none";
-    e.target.style.background = "none";
     Alert.style.display = "none";
   }
 };

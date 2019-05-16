@@ -24,9 +24,16 @@
                     <div class="mt-5 mx-3 mx-md-5">
                         <div class="forPass shadow-lg">
                             <i class="fas fa-key"></i>
-                            <input type="password" name="password" placeholder="Password" onkeyup="passInput(event)">
+                            <input type="password" name="password" placeholder="Password" onkeyup="passInput()">
                         </div>
                         <div class="pass-alert alert-sm alert-danger">Invalid Password</div>
+                    </div>
+                    <div class="mt-5 mx-3 mx-md-5">
+                        <div class="forPass2 shadow-lg">
+                            <i class="fas fa-key"></i>
+                            <input type="password" name="cnfpassword" placeholder="Confirm Password" onkeyup="pass2Input()">
+                        </div>
+                        <div class="pass-alert2 alert-sm alert-danger">Invalid Password</div>
                         <div class="text-light"> * Password must contain atleast One Uppercase,One lowercase,One special
                             character,One number</div>
                     </div>
@@ -47,14 +54,17 @@
         let passAlert = document.querySelector('.pass-alert');
         let emailBox = document.querySelector('.forEmail');
         let email = document.querySelector('.forEmail input');
-        let pass = document.querySelector('.forPass input');
+        let password = document.querySelector('.forPass input');
+        let password2 = document.querySelector('.forPass2 input');
         let passwordBox = document.querySelector('.forPass');
         let submitButton = document.querySelector('.submit-btn');
+        let passAlert2 = document.querySelector('.pass-alert2');
+        let pass2Box = document.querySelector('.forPass2');
         let isValid = false;
         let isEmail = false;
         let isPassword = false;
         document.signup.submit.disabled = true;
-
+        let pass1='',pass2='';
 
 
         emailInput = (e) => {
@@ -66,12 +76,33 @@
             validate(isValid, 'signup');
         }
 
-        passInput = (e) => {
+        passInput = () => {
             showAlert(passwordBox, passAlert, 'signup');
-            isPassword = passwordPattern.test(e.target.value);
-            hideAlert(isPassword, passwordBox, passAlert, e);
+            isPassword = passwordPattern.test(password.value);
+            pass1=password.value;
+            isPassword=passwordMatch(pass1,pass2);
+            hideAlert(isPassword, passwordBox, passAlert);
             isValid = isEmail && isPassword;
             validate(isValid, 'signup');
         }
+        pass2Input=()=>{
+            showAlert(pass2Box, passAlert2, 'signup');
+            isPassword = passwordPattern.test(password2.value);
+            console.log(password2);
+            pass2=password2.value;
+            isPassword=passwordMatch(pass1,pass2);
+            hideAlert(isPassword, pass2Box, passAlert2);
+            isValid = isEmail && isPassword;
+            console.log(isValid);
+            validate(isValid, 'signup');
+            passIput();
+            
+        }
+        
+        passwordMatch=(pass1,pass2)=>{
+            if((pass1.length>0 && pass2.length>0))
+            return pass1===pass2;
+        }
+        
     </script>
     <%- include('include/footer.ejs') %>

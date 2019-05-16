@@ -17,7 +17,7 @@ module.exports.getSignupForm = (req, res, next) => {
 module.exports.registerUser = (req, res, next) => {
   const email = req.body.email;
   let pass = req.body.password;
-  Users.Check(email)
+  Users.getUser(email)
     .then(ress => {
       console.log(ress);
       if (ress) {
