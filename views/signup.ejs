@@ -5,6 +5,9 @@
 <body>
     <%- include('include/navbar.ejs',{path:path}) %>
     <div class="container">
+        <%if(message){%>
+        <%=message%>
+        <%}%>
         <div class="row">
             <div
                 class="login-form d-flex flex-column justify-content-center offset-1 col-10 col-md-6 p-2 bg-dark offset-sm-1 offset-md-3 shadow">

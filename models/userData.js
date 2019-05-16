@@ -1,29 +1,58 @@
 const fs = require("fs");
 const path = require("path");
+const bcrypt = require("bcrypt");
 const getdb = require("../data/User").getdb;
 const myDb = getdb();
 module.exports = class Users {
   constructor(email, pass) {
     this.email = email;
     this.password = pass;
+
+    // this.bcryptin();
   }
-  save() {
+  // async bcryptin(pass) {
+  //   console.log("Executed:" + pass);
+  //   return await bcrypt.hash(this.password, 12);
+  // }
+  static Check(email) {
     const myDb = getdb();
-    myDb
+    return myDb
       .collection("New-Users")
-      .insertOne(this)
-      .then(result => {
-        console.log("Updated user->" + result.result);
+      .find({ email: email })
+      .next()
+      .then(alreadyExist => {
+        return alreadyExist;
       })
       .catch(err => {
         console.log(err);
       });
   }
-  static getUser(email, pass) {
+  save() {
+    const myDb2 = getdb();
+    return myDb2
+      .collection("New-Users")
+      .insertOne(this)
+      .then(result => {
+        return result;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    // .then(result => {
+    //   //  console.log("Updated user->" + result);
+    //   return result;
+    // })
+    // .catch(err => {
+    //   console.log("IError inside model->" + err);
+    //   // throw err;
+    //   return Promise.resolve(err);
+    // });
+  }
+  static getUser(email) {
     const myDb = getdb();
     return myDb
       .collection("New-Users")
-      .find({ email: email, password: pass })
+      .find({ email: email })
       .next()
       .then(result => {
         console.log("result inside model->" + result);
