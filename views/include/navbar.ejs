@@ -1,8 +1,12 @@
-<nav class="navbar navbar-dark bg-dark">
-    <span class="navbar-brand mb-0 h1"><a href="/" class="text-decoration-none text-light"><span
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top">
+    <button class="navbar-toggler" type="button" onclick="showSidebar()">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <span class="navbar-brand m-auto mb-0 h1"><a href="/" class="text-decoration-none text-light"><span
                 id="output"></span></a></span>
-    <div class="navbar navbar-expand" id="navbarNav">
-        <ul class="navbar-nav">
+
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
             <li class="home nav-item <%= (path=='/')?'active':''%>">
                 <a class="nav-link" href="/">Home</a>
             </li>
@@ -12,6 +16,30 @@
             <li class="signup nav-item <%= (path=='/form/signup')?'active':''%>">
                 <a class="nav-link" href="/form/signup">Sign Up</a>
             </li>
+            <li class="signup nav-item <%= (path=='/form/addprod')?'active':''%>">
+                <a class="nav-link" href="/form/addproduct">Add Product</a>
+            </li>
         </ul>
     </div>
 </nav>
+<div class="sidebar bg-dark shadow-lg" style="display:none">
+    <div class="mb-5 p-1 " onclick="showSidebar()">
+        <a class="close badge badge-secondary">&times;</a>
+    </div>
+    <ul class="navbar-nav m-auto font-weight-bolder">
+
+        <li class=" home nav-item <%= (path=='/')?'active':''%>">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="login nav-item <%= (path=='/form/login')?'active':''%>">
+            <a class="nav-link" href="/form/login">Login</a>
+        </li>
+        <li class="signup nav-item <%= (path=='/form/signup')?'active':''%>">
+            <a class="nav-link" href="/form/signup">Sign Up</a>
+        </li>
+        <li class="signup nav-item <%= (path=='/form/addprod')?'active':''%>">
+            <a class="nav-link" href="/form/addproduct">Add Product</a>
+        </li>
+    </ul>
+
+</div>

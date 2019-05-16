@@ -1,0 +1,48 @@
+.add-product-form {
+    margin-top: 7%;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.forEmail {
+    background: azure;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 7px;
+    transition: all 0.01s ease;
+}
+
+.forEmail i {
+    padding: 10px;
+}
+
+.forEmail input {
+    border: none;
+    background: none;
+    flex: 1;
+    outline: none;
+}
+
+.forEmail-textarea {
+    background: azure;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 7px;
+}
+
+.forEmail-textarea i {
+    padding: 10px;
+}
+
+.forEmail-textarea textarea {
+    border: none;
+    background: none;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    outline: none;
+}

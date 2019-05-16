@@ -1,17 +1,24 @@
 const Users = require("../models/userData");
 const bcrypt = require("bcrypt");
 module.exports.getLoginForm = (req, res, next) => {
-  res.render("login", {
+  res.render("forms/login", {
     pageTitle: "Login",
     path: "/form/login",
     message: false
   });
 };
 module.exports.getSignupForm = (req, res, next) => {
-  res.render("signup", {
+  res.render("forms/signup", {
     pageTitle: "Register",
     path: "/form/signup",
-    message: null
+    message: false
+  });
+};
+module.exports.getAddProduct = (req, res, next) => {
+  res.render("forms/addproduct", {
+    pageTitle: "Product Add",
+    path: "/form/addprod",
+    message: false
   });
 };
 module.exports.registerUser = (req, res, next) => {
@@ -21,15 +28,13 @@ module.exports.registerUser = (req, res, next) => {
     .then(ress => {
       console.log(ress);
       if (ress) {
-        res.status(200).render("signup", {
+        res.status(200).render("forms/signup", {
           pageTitle: "Register",
           path: "/signup",
           message: "E-mail already exist"
         });
-        console.log("true");
       }
       if (!ress) {
-        console.log("false");
         bcrypt
           .hash(pass, 12)
           .then(pass2 => {
@@ -37,9 +42,7 @@ module.exports.registerUser = (req, res, next) => {
             return user.save();
           })
           .then(result => {
-            // console.log(result);
-
-            res.status(200).render("signup", {
+            res.status(200).render("forms/signup", {
               pageTitle: "Register",
               path: "/signup",
               message: "Registered Successfully"
@@ -50,7 +53,6 @@ module.exports.registerUser = (req, res, next) => {
             res.status(403).send("Error");
           });
       }
-      return ress;
     })
     .catch(er => {
       console.log(" er in check->" + err);
@@ -64,8 +66,6 @@ module.exports.getLogin = (req, res, next) => {
       return bcrypt.compare(pass, result.password);
     })
     .then(auth => {
-      console.log(auth);
-      console.log(!auth);
       if (auth) {
         console.log("success =>" + auth);
         res.status(200).render("index", {
@@ -76,7 +76,7 @@ module.exports.getLogin = (req, res, next) => {
         });
       }
       if (!auth) {
-        res.render("login", {
+        res.render("forms/login", {
           pageTitle: "Login",
           path: "/form/login",
           message: "Invalid email or password"
@@ -85,42 +85,13 @@ module.exports.getLogin = (req, res, next) => {
     })
     .catch(err => {
       console.log(err);
-      res.render("login", {
+      res.render("forms/login", {
         pageTitle: "Login",
         path: "/form/login",
         message: "E-mail id doesnt exist"
       });
     });
 };
-
-// Users.fetchUsers(res => {
-
-// });
-// Users.fetchUsers(users => {
-//   //console.log(users);
-//   const result = users.filter(user => {
-//     return user.email == email && user.password == pass;
-//   });
-//   console.log("result" + result);
-
-//   if (users) {
-//     res.status(200).render("Main/main", {
-//       pageTitle: "carTVMR",
-//       path: "/login"
-//     });
-//   } else {
-//     res.status(404).render("login", {
-//       pageTitle: "Invalid User",
-//       path: "/something"
-//     });
-//   }
-// });
-// res.render("index", {
-//   pageTitle: "Home",
-//   path: "/something",
-//   result: "Logged in"
-// });
-// };
 module.exports.getIndex = (req, res, next) => {
   Users.fetchUsers()
     .then(users => {

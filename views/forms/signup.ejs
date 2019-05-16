@@ -1,12 +1,17 @@
-<%- include('include/header.ejs',{pageTitle:pageTitle}) %>
+<%- include('../include/header.ejs',{pageTitle:pageTitle}) %>
 <link rel="stylesheet" href="/css/signup.css">
 </head>
+<%- include('../include/backdrop.ejs') %>
 
 <body>
-    <%- include('include/navbar.ejs',{path:path}) %>
-
+    <%if(message){%>
+    <%- include('../include/backdrop.ejs') %>
+    <%}%>
+    <%- include('../include/navbar.ejs',{path:path}) %>
+    <%- include('../include/backdrop.ejs') %>
     <div class="container">
         <%if(message){%>
+        <%- include('include/backdrop.ejs') %>
         <%- include('include/model.ejs',{message:message})%>
         <%}%>
         <div class="row">
@@ -105,4 +110,4 @@
         }
         
     </script>
-    <%- include('include/footer.ejs') %>
+    <%- include('../include/footer.ejs') %>
