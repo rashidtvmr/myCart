@@ -1,12 +1,12 @@
-<%- include('include/header.ejs',{pageTitle:pageTitle})%>
+<%- include('../include/header.ejs',{pageTitle:pageTitle})%>
 
 <body style="text-align:center">
-    <%- include('include/navbar.ejs',{path:path})%>
+    <%- include('../include/navbar.ejs',{path:path})%>
     <div class="container-fluid">
-        <p>Currently Registered Users</p>
+        <p>Available Products</p>
 
         <% result.forEach(prod=>{  %>
-        <%- include('include/card.ejs',{product:prod,edit:edit})%>
+        <%- include('../include/card.ejs',{product:prod,edit:edit})%>
         <% }); %>
     </div>
     <script src="/js/main.js"></script>

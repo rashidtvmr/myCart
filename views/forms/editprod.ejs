@@ -1,0 +1,61 @@
+<%- include('../include/header.ejs',{pageTitle:pageTitle }) %>
+<link rel="stylesheet" href="/css/addproduct.css">
+</head>
+
+<body>
+
+
+
+    <%- include('../include/navbar.ejs',{path:path}) %>
+    <%if(message){%>
+    <%- include('../include/backdrop.ejs') %>
+    <%- include('../include/model.ejs',{message:message})%>
+    <%}%>
+    <%- include('../include/backdrop.ejs') %>
+    <div class="container">
+        <div class="row">
+            <div
+                class="add-product-form d-flex flex-column justify-content-center offset-1 col-10 col-md-6 p-2 bg-dark offset-sm-1 offset-md-3 shadow-lg">
+                <form method="POST" action="/admin/postEditProduct/<%=prod._id%>">
+                    <p class="font-weight-bolder text-light">Edit Product</p>
+                    <div class="mt-5 mx-3 mx-md-5">
+                        <div class="forEmail shadow-lg">
+                            <i class="fas fa-shopping-cart"></i>
+                            <input type="text" placeholder="Title" name="title" value="<%=prod.title%>">
+                        </div>
+
+                    </div>
+                    <div class="mt-5 mx-3 mx-md-5">
+                        <div class="forEmail shadow-lg">
+                            <i class="fas fa-rupee-sign"></i>
+                            <input type="number" step=0.01 placeholder="Price" name="price" value="<%=prod.price%>">
+                        </div>
+
+                    </div>
+                    <div class="mt-5 mx-3 mx-md-5">
+                        <div class="forEmail shadow-lg">
+                            <i class="fas fa-images"></i>
+                            <input type="text" placeholder="Image Url" name="url" value="<%=prod.imgUrl%>">
+                        </div>
+
+                    </div>
+                    <div class="mt-5 mx-3 mx-md-5">
+                        <div class="forEmail-textarea shadow-lg">
+                            <i class="fas fa-envelope"></i>
+                            <textarea type="text" placeholder="Description" name="desc"
+                                rows="5"><%=prod.desc%></textarea>
+                        </div>
+                    </div>
+                    <div class="submit-btn my-5 mx-3 mx-md-5">
+                        <input type="submit" class="submit-btn btn w-100 btn-primary px-5 badge-pill" name="submit"
+                            value="Update">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/js/main.js"></script>
+    <script>
+        typeIt("Add Your Product", output, 200);
+    </script>
+    <%- include('../include/footer.ejs') %>

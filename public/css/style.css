@@ -40,7 +40,7 @@ body {
     border-radius: 20px;
     box-sizing: border-box;
     box-shadow: 1px 1px 1px 1px rgb(68, 55, 55);
-    transition: all 5s linear;
+    transition: all 1s ease-in;
     font-weight: bolder;
 
 }
@@ -68,9 +68,10 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 50%;
+    width: 70%;
     height: 100vh;
     z-index: 15000;
+    transition: all 1s ease-in;
 
 }
 
@@ -84,20 +85,34 @@ body {
     display: block;
     box-sizing: border-box;
     padding: 5px;
-    margin-left: 5%;
+    margin: 5%;
     width: 90%;
     height: 60%;
     border-radius: 10px;
     box-shadow: 1px 1px 1px azure;
 }
 
+.card div img {
+    width: 280px;
+    height: 210px;
+}
+
 @media(min-width:40rem) {
     .card {
         margin: 1%;
+
         display: inline-block;
         width: 20%;
         height: 20%;
+        max-width: 450px;
+        max-height: 450px;
+    }
 
+    .card div img {
+        max-width: 450px;
+        max-width: 450px;
+        max-height: 300px;
+        min-height: 300px;
     }
 
     .model {

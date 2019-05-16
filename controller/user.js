@@ -8,6 +8,7 @@ module.exports.getLoginForm = (req, res, next) => {
     message: false
   });
 };
+
 module.exports.getSignupForm = (req, res, next) => {
   res.render("forms/signup", {
     pageTitle: "Register",
@@ -15,6 +16,7 @@ module.exports.getSignupForm = (req, res, next) => {
     message: false
   });
 };
+
 module.exports.getAddProduct = (req, res, next) => {
   res.render("forms/addproduct", {
     pageTitle: "Product Add",
@@ -22,6 +24,7 @@ module.exports.getAddProduct = (req, res, next) => {
     message: false
   });
 };
+
 module.exports.registerUser = (req, res, next) => {
   const email = req.body.email;
   let pass = req.body.password;
@@ -59,6 +62,7 @@ module.exports.registerUser = (req, res, next) => {
       console.log(" er in check->" + err);
     });
 };
+
 module.exports.getLogin = (req, res, next) => {
   const email = req.body.email;
   const pass = req.body.password;
@@ -93,6 +97,7 @@ module.exports.getLogin = (req, res, next) => {
       });
     });
 };
+
 module.exports.getIndex = (req, res, next) => {
   Product.fetchAll()
     .then(product => {
@@ -100,6 +105,7 @@ module.exports.getIndex = (req, res, next) => {
         pageTitle: "carTVMR",
         path: "/",
         result: product,
+        edit: false,
         message: `Welocome to CARTvmr`
       });
     })
@@ -107,6 +113,10 @@ module.exports.getIndex = (req, res, next) => {
       console.log(err);
     });
 };
+module.exports.getPostCart = (req, res, next) => {
+  next();
+};
+
 module.exports.get404 = (req, res, next) => {
   res.status(404).render("404", {
     pageTitle: "Page not found",

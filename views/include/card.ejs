@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card shadow-lg">
     <div>
         <img class="img-fluid w-100" src="<%=product.imgUrl%>" alt="<%=product.title%>">
     </div>
@@ -6,6 +6,24 @@
         <span><b><%=product.title%></b></span>
 
     </div>
-    <div><span>Price:<%=product.price%></span></div>
-    <button>Detail</button>
+    <div><span>Price :<i class="fas fa-rupee-sign" style="font-size:10px"></i> <%= product.price%></span></div>
+
+    <% if(edit){ %>
+    <form method="POST" action="/admin/getEditForm/<%=product._id%>">
+        <input class="btn btn-primary m-1" type="submit" value="Edit">
+    </form>
+    <form method="POST" action="/admin/getDeleteProduct/<%=product._id%>">
+        <input class="btn btn-primary m-1" type="submit" value="Delete">
+    </form>
+    <!-- <a class="btn btn-primary m-1" href="/admin/getEditForm/<%=product._id%>">Edit</a>
+    <a class="btn btn-primary m-1" href="/admin/getDeleteProduct/<%=product._id%>">Delete</a> -->
+    <% }else{ %>
+    <form method="POST" action="product/getprod/<%=product._id%>" style="display:inline-block">
+
+        <input class="btn btn-primary m-1" type="submit" value="Detail">
+    </form>
+    <form method="POST" action="/cart/addtocart/<%=product._id%>" style="display:inline-block">
+        <input class="btn btn-primary m-1" type="submit" value="Add to Cart">
+    </form>
+    <%}%>
 </div>
