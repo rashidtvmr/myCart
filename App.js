@@ -9,6 +9,7 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 
 const userRoute = require("./Route/user");
+const adminRoute = require("./Route/admin");
 const controller = require("./controller/user");
 //const Data = signup.Data;
 
@@ -17,9 +18,12 @@ app.use(bodyParser.json());
 app.use(express.static("./public"));
 
 app.use("/form", userRoute);
+//post /admin/addproduct
+app.use("/admin", adminRoute);
 // app.use("/form/addproduct", controller.getAddProduct);
 app.use("/signup", controller.registerUser);
 app.post("/login", controller.getLogin);
+
 app.get("/", controller.getIndex);
 app.use(controller.get404);
 

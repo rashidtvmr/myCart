@@ -1,4 +1,5 @@
 const Users = require("../models/userData");
+const Product = require("../models/product");
 const bcrypt = require("bcrypt");
 module.exports.getLoginForm = (req, res, next) => {
   res.render("forms/login", {
@@ -93,13 +94,12 @@ module.exports.getLogin = (req, res, next) => {
     });
 };
 module.exports.getIndex = (req, res, next) => {
-  Users.fetchUsers()
-    .then(users => {
-      console.log("User Email" + users[0].email);
+  Product.fetchAll()
+    .then(product => {
       res.render("index", {
         pageTitle: "carTVMR",
         path: "/",
-        result: users,
+        result: product,
         message: `Welocome to CARTvmr`
       });
     })

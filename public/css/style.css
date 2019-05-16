@@ -14,6 +14,7 @@ body {
     color: black;
 }
 
+
 .login:hover,
 .login:active,
 .signup:hover,
@@ -35,7 +36,7 @@ body {
     height: auto;
     top: 30%;
     left: 10%;
-    z-index: 15000;
+    z-index: 5000;
     border-radius: 20px;
     box-sizing: border-box;
     box-shadow: 1px 1px 1px 1px rgb(68, 55, 55);
@@ -78,12 +79,31 @@ body {
     color: white;
 }
 
+.card {
+
+    display: block;
+    box-sizing: border-box;
+    padding: 5px;
+    margin-left: 5%;
+    width: 90%;
+    height: 60%;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px azure;
+}
+
 @media(min-width:40rem) {
+    .card {
+        margin: 1%;
+        display: inline-block;
+        width: 20%;
+        height: 20%;
+
+    }
+
     .model {
         padding: 20px;
         height: auto;
         width: auto;
-
         left: 40%;
     }
 

@@ -3,17 +3,10 @@
 <body style="text-align:center">
     <%- include('include/navbar.ejs',{path:path})%>
     <p>Currently Registered Users</p>
-    <pre>
-        <p><%=message%></p>
-        <ul>
-        <% result.forEach(user=>{ %>
-            <li>Your E-mail is-> <%= user.email%></li>
-            <li>Your Password is-> <%= user.password%></li>
-            
-            <br>
-         <% }); %>   
-        </ul>
-    </pre>
+
+    <% result.forEach(prod=>{  %>
+    <%- include('include/card.ejs',{product:prod})%>
+    <% }); %>
     <script src="/js/main.js"></script>
     <script>
         let output = document.getElementById("output");

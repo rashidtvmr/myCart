@@ -1,8 +1,5 @@
-const fs = require("fs");
-const path = require("path");
 const bcrypt = require("bcrypt");
 const getdb = require("../data/User").getdb;
-// const myDb = getdb();
 module.exports = class Users {
   constructor(email, pass) {
     this.email = email;
