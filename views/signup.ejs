@@ -7,7 +7,7 @@
 
     <div class="container">
         <%if(message){%>
-        <%=message%>
+        <%- include('include/model.ejs',{message:message})%>
         <%}%>
         <div class="row">
             <div

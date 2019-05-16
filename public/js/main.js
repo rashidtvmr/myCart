@@ -1,3 +1,4 @@
+let model = document.querySelector(".model");
 //Typed......
 typeIt = (text, element, speed) => {
   let c = 0;
@@ -35,4 +36,10 @@ validate = (isValid, formName) => {
   if (isValid) {
     document[formName].submit.disabled = false;
   }
+};
+OKClicked = () => {
+  model.style.display = "none";
+};
+cancelClicked = () => {
+  model.style.display = "none";
 };

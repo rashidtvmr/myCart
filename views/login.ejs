@@ -4,6 +4,9 @@
 
 <body>
     <%- include('include/navbar.ejs',{path:path}) %>
+    <%if(message){%>
+    <%- include('include/model.ejs',{message:message})%>
+    <%}%>
     <div class="container">
         <div class="row">
             <div
@@ -11,8 +14,8 @@
                 <form name="login" action="/login" method="POST">
                     <p class="font-weight-bolder text-light">Login</p>
                     <% if(message){%>
-                    <div class="email-alert alert-sm alert-danger"><%=message%></div>
-                    <%}%>
+    <div class="email-alert alert-sm alert-danger"><%=message%></div>
+    <%}%>
                     <div class="mt-5 mx-3 mx-md-5">
                         <div class="forEmail shadow-lg">
                             <i class="fas fa-envelope"></i>
