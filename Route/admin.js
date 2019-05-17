@@ -6,6 +6,7 @@ router.get("/editPage", adminController.getEditPage);
 //post /admin/addproduct
 router.post("/addproduct", adminController.postAddProduct);
 
+router.get("/getprod/:prodId", adminController.getProductDetail);
 //   /admin/getEditForm/
 router.post("/getEditForm/:id", adminController.getEditProduct);
 

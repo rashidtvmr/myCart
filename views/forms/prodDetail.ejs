@@ -1,19 +1,20 @@
-<%- include('include/header.ejs',{pageTitle:pageTitle})%>
+<%- include('../include/header.ejs',{pageTitle:pageTitle})%>
 
 <body style="text-align:center">
-    <%- include('include/navbar.ejs',{path:path})%>
+    <%- include('../include/navbar.ejs',{path:path})%>
     <div class="container">
-        <h3><%=product.title%></h3>
-        <div><img class="img-fluid w-100" src="<%=product.ingUrl%>"></div>
-        <h1>Price(in <i class="fas fa-rupee-sign"></i>) : <%=product.price%></h1>
+        <h3><%=product.title %></h3>
+        <div><img class="img-fluid w-80 h-80" src="<%= product.imgUrl %>" style="max-height:'50px';max-width:'50px'">
+        </div>
+        <h1>Price(in <i class="fas fa-rupee-sign"></i>) : <%= product.price %></h1>
         <div>
-            <p><%=product.desc%></p>
+            <p><%= product.desc %></p>
         </div>
     </div>
     <script src="/js/main.js"></script>
     <script>
         let output = document.getElementById("output");
-        typeIt("<%= product.title % >", output, 200); //(string,targetElement,time(in sec))
+        typeIt("<%= product.title %>", output, 200); //(string,targetElement,time(in sec))
     </script>
-    <%- include('include/footer.ejs')%>
+    <%- include('../include/footer.ejs')%>
 </body>

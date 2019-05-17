@@ -1,4 +1,3 @@
-<div class="backdrop" style="display:none"></div>
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top">
     <button class="navbar-toggler" type="button" onclick="showSidebar()">
         <span class="navbar-toggler-icon"></span>
@@ -26,7 +25,10 @@
         </ul>
     </div>
 </nav>
+
+<%- include('backdrop.ejs')%>
 <div class="sidebar bg-dark shadow-lg" style="display:none">
+
     <div class="mb-5 p-1 " onclick="showSidebar()">
         <a class="close badge badge-secondary">&times;</a>
     </div>

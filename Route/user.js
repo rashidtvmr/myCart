@@ -10,6 +10,5 @@ router.get("/signup", controller.getSignupForm);
 router.get("/addproduct", controller.getAddProduct);
 
 // form/getprod/5cdd963cb392d829f8d0f616
-router.get("/getprod/:prodId", adminController.getProductDetail);
 
 module.exports = router;

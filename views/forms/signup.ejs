@@ -1,19 +1,14 @@
 <%- include('../include/header.ejs',{pageTitle:pageTitle}) %>
 <link rel="stylesheet" href="/css/signup.css">
 </head>
-<%- include('../include/backdrop.ejs') %>
 
 <body>
-    <%if(message){%>
-    <%- include('../include/backdrop.ejs') %>
-    <%}%>
     <%- include('../include/navbar.ejs',{path:path}) %>
-    <%- include('../include/backdrop.ejs') %>
+    <%if(message){%>
+    <div class="backdrop" style="display:block" id="loginBack" onclick="modelBackdropClicked(event)"></div>
+    <%- include('../include/model.ejs',{message:message})%>
+    <%}%>
     <div class="container">
-        <%if(message){%>
-        <%- include('../include/backdrop.ejs') %>
-        <%- include('../include/model.ejs',{message:message})%>
-        <%}%>
         <div class="row">
             <div
                 class="login-form d-flex flex-column justify-content-center offset-1 col-10 col-md-6 p-2 bg-dark offset-sm-1 offset-md-3 shadow">
@@ -36,7 +31,8 @@
                     <div class="mt-5 mx-3 mx-md-5">
                         <div class="forPass2 shadow-lg">
                             <i class="fas fa-key"></i>
-                            <input type="password" name="cnfpassword" placeholder="Confirm Password" onkeyup="pass2Input()">
+                            <input type="password" name="cnfpassword" placeholder="Confirm Password"
+                                onkeyup="pass2Input()">
                         </div>
                         <div class="pass-alert2 alert-sm alert-danger">Invalid Password</div>
                         <div class="text-light"> * Password must contain atleast One Uppercase,One lowercase,One special
@@ -52,7 +48,7 @@
     </div>
     <script src="/js/main.js"></script>
     <script>
-         typeIt("Register", output, 200);
+        typeIt("Register", output, 200);
         const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
         const passwordPattern = /^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/;
         let emailAlert = document.querySelector('.email-alert');
@@ -69,7 +65,8 @@
         let isEmail = false;
         let isPassword = false;
         document.signup.submit.disabled = true;
-        let pass1='',pass2='';
+        let pass1 = '',
+            pass2 = '';
 
 
         emailInput = (e) => {
@@ -84,30 +81,29 @@
         passInput = () => {
             showAlert(passwordBox, passAlert, 'signup');
             isPassword = passwordPattern.test(password.value);
-            pass1=password.value;
-            isPassword=passwordMatch(pass1,pass2);
+            pass1 = password.value;
+            isPassword = passwordMatch(pass1, pass2);
             hideAlert(isPassword, passwordBox, passAlert);
             isValid = isEmail && isPassword;
             validate(isValid, 'signup');
         }
-        pass2Input=()=>{
+        pass2Input = () => {
             showAlert(pass2Box, passAlert2, 'signup');
             isPassword = passwordPattern.test(password2.value);
             console.log(password2);
-            pass2=password2.value;
-            isPassword=passwordMatch(pass1,pass2);
+            pass2 = password2.value;
+            isPassword = passwordMatch(pass1, pass2);
             hideAlert(isPassword, pass2Box, passAlert2);
             isValid = isEmail && isPassword;
             console.log(isValid);
             validate(isValid, 'signup');
             passIput();
-            
+
         }
-        
-        passwordMatch=(pass1,pass2)=>{
-            if((pass1.length>0 && pass2.length>0))
-            return pass1===pass2;
+
+        passwordMatch = (pass1, pass2) => {
+            if ((pass1.length > 0 && pass2.length > 0))
+                return pass1 === pass2;
         }
-        
     </script>
     <%- include('../include/footer.ejs') %>

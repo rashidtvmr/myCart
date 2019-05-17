@@ -5,7 +5,8 @@
 <body>
     <%- include('../include/navbar.ejs',{path:path}) %>
     <%if(message){%>
-    <%- include('../include/backdrop.ejs') %>
+    <div class="backdrop" style="display:block" id="loginBack" onclick="modelBackdropClicked(event)"></div>
+    <!-- <%- include('../include/backdrop.ejs') %> -->
     <%- include('../include/model.ejs',{message:message})%>
     <%}%>
     <div class="container">

@@ -1,6 +1,8 @@
 let model = document.querySelector(".model");
 let sideBar = document.querySelector(".sidebar");
 let backdrop = document.querySelector(".backdrop");
+//let loginBack = document.getElementById("loginBack");
+
 //Typed......
 typeIt = (text, element, speed) => {
   let c = 0;
@@ -20,6 +22,11 @@ typeIt = (text, element, speed) => {
     clearInterval(con);
   };
 };
+backdropClicked = () => {
+  backdrop.style.display = "none";
+  sideBar.style.display = "none";
+};
+
 //Typed......
 let isSidebarShowing = false;
 //sidebar
@@ -56,7 +63,19 @@ validate = (isValid, formName) => {
 // OKClicked = () => {
 //   model.style.display = "none";
 // };
+
+backdrop.addEventListener("click", () => {
+  if (sideBar.style.display == "block") {
+    showSidebar();
+    backdrop.style.display = "none";
+  }
+});
 cancelClicked = () => {
-  backdrop.style.display = "none";
   model.style.display = "none";
+  backdrop.style.display = "none";
+};
+modelBackdropClicked = e => {
+  console.log(e.target);
+  model.style.display = "none";
+  e.target.style.display = "none";
 };

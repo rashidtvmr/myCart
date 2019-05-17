@@ -4,7 +4,7 @@
 }
 
 body {
-    margin-top: 7%;
+    margin-top: 10%;
     text-align: center;
 }
 
@@ -27,18 +27,6 @@ body {
     color: white;
 }
 
-
-.backdrop {
-    display: block;
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background: rgb(0, 0, 0, 0.3);
-    z-index: 5000;
-
-}
 
 .model {
     padding: 10px;
@@ -70,14 +58,26 @@ body {
     left: 0;
     width: 70%;
     height: 100vh;
-    z-index: 20000;
     transition: all 1s ease;
+    z-index: 20000;
 
 }
 
 .sidebar ul li a {
     text-decoration: none;
     color: white;
+}
+
+
+.backdrop {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgb(0, 0, 0, 0.4);
+    z-index: 100;
 }
 
 .card {
