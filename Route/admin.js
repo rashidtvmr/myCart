@@ -10,6 +10,9 @@ router.get("/getprod/:prodId", adminController.getProductDetail);
 //   /admin/getEditForm/
 router.post("/getEditForm/:id", adminController.getEditProduct);
 
+///admin/getDeleteProduct/<%=product._id%>
+
+router.post("/postDeleteProduct/:prodId", adminController.postDeleteProduct);
 // /admin/postEditProduct/
 router.post("/postEditProduct/:id", adminController.postEditProduct);
 

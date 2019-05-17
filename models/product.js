@@ -41,6 +41,18 @@ module.exports = class Product {
         console.log(err);
       });
   }
+  static deleteById(id) {
+    const myDb = getdb();
+    return myDb
+      .collection("product")
+      .deleteOne({ _id: id })
+      .then(result => {
+        return result;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
   static fetchAll() {
     const myDb = getdb();
     return myDb

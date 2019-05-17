@@ -105,3 +105,15 @@ module.exports.getProductDetail = (req, res, next) => {
       console.log(err);
     });
 };
+
+module.exports.postDeleteProduct = (req, res, next) => {
+  const id = req.params.prodId;
+  Product.deleteById(new ObjectId(id))
+    .then(result => {
+      if (result) res.redirect("/");
+      else res.redirect("/form/editPage");
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
