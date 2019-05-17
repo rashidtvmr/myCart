@@ -9,21 +9,22 @@
     <div><span>Price :<i class="fas fa-rupee-sign" style="font-size:10px"></i> <%= product.price%></span></div>
 
     <% if(edit){ %>
-    <form method="POST" action="/admin/getEditForm/<%=product._id%>">
-        <input class="btn btn-primary m-1" type="submit" value="Edit">
+    <form method="POST" action="/admin/getEditForm/<%=product._id%>" style="display:inline-block">
+        <input class="btn btn-primary m-1" type="submit" value="Edit" style="border-radius: 10px;">
     </form>
-    <form method="POST" action="/admin/getDeleteProduct/<%=product._id%>">
-        <input class="btn btn-primary m-1" type="submit" value="Delete">
+    <form method="POST" action="/admin/getDeleteProduct/<%=product._id%>" style="display:inline-block">
+        <input class="btn btn-primary m-1" type="submit" value="Delete" style="border-radius: 10px;">
     </form>
     <!-- <a class="btn btn-primary m-1" href="/admin/getEditForm/<%=product._id%>">Edit</a>
     <a class="btn btn-primary m-1" href="/admin/getDeleteProduct/<%=product._id%>">Delete</a> -->
     <% }else{ %>
-    <form method="POST" action="product/getprod/<%=product._id%>" style="display:inline-block">
+    <!-- /getprod/:prodId -->
+    <form method="POST" action="form/getprod/<%=product._id%>" style="display:inline-block">
 
-        <input class="btn btn-primary m-1" type="submit" value="Detail">
+        <input class="btn btn-primary m-1" type="submit" value="Detail" style="border-radius: 10px;">
     </form>
     <form method="POST" action="/cart/addtocart/<%=product._id%>" style="display:inline-block">
-        <input class="btn btn-primary m-1" type="submit" value="Add to Cart">
+        <input class="btn btn-primary m-1" type="submit" value="Add to Cart" style="border-radius: 10px;">
     </form>
     <%}%>
 </div>

@@ -84,3 +84,24 @@ module.exports.getEditPage = (req, res, next) => {
       console.log(err);
     });
 };
+
+// adminController.getProductDetail;
+module.exports.getProductDetail = (req, res, next) => {
+  const id = req.params.prodId;
+  console.log("detail for->" + id);
+  Product.getById(id)
+    .then(result => {
+      console.log("res inside admin contr->" + result);
+      if (result) {
+        res.render("forms/prodDetail.ejs", {
+          pageTitle: result.title,
+          path: "/",
+          message: false,
+          product: result
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};

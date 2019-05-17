@@ -1,0 +1,19 @@
+<%- include('include/header.ejs',{pageTitle:pageTitle})%>
+
+<body style="text-align:center">
+    <%- include('include/navbar.ejs',{path:path})%>
+    <div class="container">
+        <h3><%=product.title%></h3>
+        <div><img class="img-fluid w-100" src="<%=product.ingUrl%>"></div>
+        <h1>Price(in <i class="fas fa-rupee-sign"></i>) : <%=product.price%></h1>
+        <div>
+            <p><%=product.desc%></p>
+        </div>
+    </div>
+    <script src="/js/main.js"></script>
+    <script>
+        let output = document.getElementById("output");
+        typeIt("<%= product.title % >", output, 200); //(string,targetElement,time(in sec))
+    </script>
+    <%- include('include/footer.ejs')%>
+</body>

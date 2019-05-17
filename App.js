@@ -18,9 +18,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static("./public"));
 
+///form/getprod/:prodId
+app.use("/form", userRoute);
+
 app.use("/admin", adminRoute);
 
-app.use("/form", userRoute);
 //post /admin/addproduct
 // app.use("/form/addproduct", controller.getAddProduct);
 app.use("/signup", controller.registerUser);

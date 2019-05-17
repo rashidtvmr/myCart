@@ -1,5 +1,6 @@
 let model = document.querySelector(".model");
 let sideBar = document.querySelector(".sidebar");
+let backdrop = document.querySelector(".backdrop");
 //Typed......
 typeIt = (text, element, speed) => {
   let c = 0;
@@ -24,9 +25,11 @@ let isSidebarShowing = false;
 //sidebar
 showSidebar = () => {
   if (isSidebarShowing) {
+    backdrop.style.display = "none";
     sideBar.style.display = "none";
     isSidebarShowing = !isSidebarShowing;
   } else {
+    backdrop.style.display = "block";
     sideBar.style.display = "block";
     isSidebarShowing = !isSidebarShowing;
   }
@@ -54,5 +57,6 @@ validate = (isValid, formName) => {
 //   model.style.display = "none";
 // };
 cancelClicked = () => {
+  backdrop.style.display = "none";
   model.style.display = "none";
 };

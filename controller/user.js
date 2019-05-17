@@ -73,10 +73,10 @@ module.exports.getLogin = (req, res, next) => {
     .then(auth => {
       if (auth) {
         console.log("success =>" + auth);
-        res.status(200).render("index", {
-          pageTitle: "carTVMR",
+        res.status(200).render("Main/main", {
+          pageTitle: "Main",
           path: "/",
-          result: [auth],
+          result: auth,
           message: `Welocome ${auth.email}`
         });
       }

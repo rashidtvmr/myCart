@@ -27,40 +27,40 @@ body {
     color: white;
 }
 
+
+.backdrop {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgb(0, 0, 0, 0.3);
+    z-index: 5000;
+
+}
+
 .model {
     padding: 10px;
     display: block;
     position: fixed;
-    background: gray;
+    border: 0.5px solid black;
+    background: azure;
     width: 80%;
     height: auto;
     top: 30%;
     left: 10%;
-    z-index: 5000;
-    border-radius: 20px;
+    z-index: 10000;
+    border-radius: 10px;
     box-sizing: border-box;
     box-shadow: 1px 1px 1px 1px rgb(68, 55, 55);
-    transition: all 1s ease-in;
+    transition: all 0.4s ease;
     font-weight: bolder;
 
 }
 
 
 
-
-.backdrop {
-    display: none;
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
-    background: rgb(0, 0, 0);
-    z-index: 10000;
-
-}
 
 .sidebar {
     color: white;
@@ -70,8 +70,8 @@ body {
     left: 0;
     width: 70%;
     height: 100vh;
-    z-index: 15000;
-    transition: all 1s ease-in;
+    z-index: 20000;
+    transition: all 1s ease;
 
 }
 
@@ -89,7 +89,6 @@ body {
     width: 90%;
     height: 60%;
     border-radius: 10px;
-    box-shadow: 1px 1px 1px azure;
 }
 
 .card div img {
