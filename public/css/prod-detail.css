@@ -1,0 +1,19 @@
+.prod-det-img {
+    max-width: 90%;
+    max-width: 90%;
+    max-height: 60%;
+    min-height: 60%;
+    margin: 5%;
+    image-resolution: initial;
+}
+
+@media(min-width) {
+    .prod-det-img {
+        width: 250px;
+        max-width: 30%;
+        min-width: 30%;
+        max-height: 30%;
+        min-height: 30%;
+        height: 250px;
+    }
+}

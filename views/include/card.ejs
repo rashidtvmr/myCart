@@ -19,7 +19,7 @@
     <a class="btn btn-primary m-1" href="/admin/getDeleteProduct/<%=product._id%>">Delete</a> -->
     <% }else{ %>
     <!-- /getprod/:prodId -->
-    <form method="POST" action="form/getprod/<%=product._id%>" style="display:inline-block">
+    <form method="GET" action="admin/getprod/<%=product._id%>" style="display:inline-block">
 
         <input class="btn btn-primary m-1" type="submit" value="Detail" style="border-radius: 10px;">
     </form>
