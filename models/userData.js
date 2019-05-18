@@ -43,7 +43,7 @@ module.exports = class Users {
         return result;
       })
       .catch(err => {
-        throw err;
+        return err;
       });
   }
   static fetchUsers() {

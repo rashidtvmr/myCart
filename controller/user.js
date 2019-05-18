@@ -72,8 +72,7 @@ module.exports.registerUser = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log("INside controller->" + err);
-      res.status(403).send("Error");
+      console.log("Inside controller(post register)->" + err);
     });
   // }
   // })
@@ -98,36 +97,42 @@ module.exports.getLogin = (req, res, next) => {
   let isAdmin;
   Users.getUser(email, pass)
     .then(result => {
-      isAdmin = Boolean(result.hasOwnProperty("isAdmin"));
-      console.log("isadmin->" + isAdmin);
-      return bcrypt.compare(pass, result.password);
-    })
-    .then(isMatch => {
-      if (isMatch) {
-        console.log("nested isad" + isAdmin);
-        if (isAdmin) {
-          req.session.isAdmin = isAdmin;
-        }
-        // res.setHeader("Set-Cookie", "isLoggedin=true");
-        req.session.isLoggedin = true;
-        console.log("success =>" + isMatch);
-        res.status(200).render("Main/main", {
-          pageTitle: "Main",
-          path: "/",
-          result: isMatch,
-          message: `Welocome ${isMatch.email}`,
-          isAuthenticated: req.session.isAuthenticated,
-          isAdmin: req.session.isAdmin
-        });
-      }
-      if (!isMatch) {
-        res.render("forms/login", {
-          pageTitle: "Login",
-          path: "/form/login",
-          message: "Invalid email or password",
-          isAuthenticated: req.session.isLoggedin,
-          isAdmin: req.session.isAdmin
-        });
+      if (result) {
+        isAdmin = Boolean(result.hasOwnProperty("isAdmin"));
+        console.log("isadmin->" + isAdmin);
+        bcrypt
+          .compare(pass, result.password)
+          .then(isMatch => {
+            if (isMatch) {
+              console.log("nested isad" + isAdmin);
+              if (isAdmin) {
+                req.session.isAdmin = isAdmin;
+              }
+              // res.setHeader("Set-Cookie", "isLoggedin=true");
+              req.session.isLoggedin = true;
+              console.log("success =>" + isMatch);
+              res.status(200).render("Main/main", {
+                pageTitle: "Main",
+                path: "/",
+                result: isMatch,
+                message: `Welocome ${isMatch.email}`,
+                isAuthenticated: req.session.isAuthenticated,
+                isAdmin: req.session.isAdmin
+              });
+            }
+            if (!isMatch) {
+              res.render("forms/login", {
+                pageTitle: "Login",
+                path: "/form/login",
+                message: "Invalid email or password",
+                isAuthenticated: req.session.isLoggedin,
+                isAdmin: req.session.isAdmin
+              });
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
       }
     })
     .catch(err => {

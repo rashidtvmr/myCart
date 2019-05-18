@@ -49,7 +49,6 @@ app.use(
   "/signup",
   body("email")
     .trim()
-    .not()
     .isEmail()
     .withMessage("Invalid E-mail")
     .normalizeEmail()
@@ -80,10 +79,13 @@ app.post(
       .trim()
       .isEmail()
       .normalizeEmail(),
-    body("password", "Password should not be empty")
+    body("password")
       .trim()
       .isLength({ min: 6, max: 20 })
-      .withMessage("Password SHould be minimum 6 character")
+      .withMessage("Password Should be minimum 6 character")
+      .not()
+      .isEmpty()
+      .withMessage("Password Should not be empty")
   ],
   controller.getLogin
 );
