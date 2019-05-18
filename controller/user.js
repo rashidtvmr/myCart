@@ -129,9 +129,9 @@ module.exports.getIndex = (req, res, next) => {
       console.log(err);
     });
 };
-module.exports.getPostCart = (req, res, next) => {
-  next();
-};
+// module.exports.getPostCart = (req, res, next) => {
+//   next();
+// };
 
 module.exports.get404 = (req, res, next) => {
   res.status(404).render("404", {
