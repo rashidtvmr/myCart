@@ -5,9 +5,6 @@ module.exports.getLogout = (req, res, next) => {
   res.redirect("/");
 };
 module.exports.postAddProduct = (req, res, next) => {
-  const isAuthenticated = req.get("Cookie").split(";")[1];
-  console.log("auth:" + isAuthenticated);
-  console.log("Admin add pro", req);
   const title = req.body.title;
   const price = req.body.price;
   const imgUrl = req.body.url;
@@ -20,7 +17,9 @@ module.exports.postAddProduct = (req, res, next) => {
         res.render("forms/addproduct", {
           pageTitle: "Product Add",
           path: "/form/addprod",
-          message: "Added Successfully"
+          message: "Added Successfully",
+          isAuthenticated: req.session.isLoggedin,
+          isAdmin: req.session.isAdmin
         });
         if (!result) {
           res.redirect("/");
@@ -44,7 +43,8 @@ module.exports.getEditProduct = (req, res, next) => {
           path: "/",
           message: false,
           prod: result,
-          isAuthenticated: req.session.isLoggedin
+          isAuthenticated: req.session.isLoggedin,
+          isAdmin: req.session.isAdmin
         });
       }
     })
@@ -69,7 +69,8 @@ module.exports.postEditProduct = (req, res, next) => {
         result: [product],
         edit: false,
         message: `Edited Product`,
-        isAuthenticated: req.session.isLoggedin
+        isAuthenticated: req.session.isLoggedin,
+        isAdmin: req.session.isAdmin
       });
     })
     .catch(err => {
@@ -85,7 +86,8 @@ module.exports.getEditPage = (req, res, next) => {
         result: product,
         edit: true,
         message: `Welocome to CARTvmr`,
-        isAuthenticated: req.session.isLoggedin
+        isAuthenticated: req.session.isLoggedin,
+        isAdmin: req.session.isAdmin
       });
     })
     .catch(err => {
@@ -106,7 +108,8 @@ module.exports.getProductDetail = (req, res, next) => {
           path: "/",
           message: false,
           product: result,
-          isAuthenticated: req.session.isLoggedin
+          isAuthenticated: req.session.isLoggedin,
+          isAdmin: req.session.isAdmin
         });
       }
     })

@@ -7,7 +7,8 @@ module.exports.getLoginForm = (req, res, next) => {
     pageTitle: "Login",
     path: "/form/login",
     message: false,
-    isAuthenticated: req.session.isLoggedin // Boolean()
+    isAuthenticated: req.session.isLoggedin,
+    isAdmin: req.session.isAdmin // Boolean()
   });
 };
 
@@ -16,7 +17,8 @@ module.exports.getSignupForm = (req, res, next) => {
     pageTitle: "Register",
     path: "/form/signup",
     message: false,
-    isAuthenticated: req.session.isLoggedin // Boolean()
+    isAuthenticated: req.session.isLoggedin,
+    isAdmin: req.session.isAdmin // Boolean()
   });
 };
 
@@ -25,7 +27,8 @@ module.exports.getAddProduct = (req, res, next) => {
     pageTitle: "Product Add",
     path: "/form/addprod",
     message: false,
-    isAuthenticated: Boolean(req.session.isLoggedin)
+    isAuthenticated: req.session.isLoggedin,
+    isAdmin: req.session.isAdmin
   });
 };
 
@@ -37,7 +40,9 @@ module.exports.registerUser = (req, res, next) => {
     res.status(422).render("forms/signup", {
       pageTitle: "Register",
       path: "/signup",
-      message: error.array()[0].msg
+      message: error.array()[0].msg,
+      isAuthenticated: req.session.isLoggedin,
+      isAdmin: req.session.isAdmin
     });
   }
   // Users.getUser(email)
@@ -61,7 +66,9 @@ module.exports.registerUser = (req, res, next) => {
       res.status(200).render("forms/signup", {
         pageTitle: "Register",
         path: "/signup",
-        message: "Registered Successfully"
+        message: "Registered Successfully",
+        isAuthenticated: req.session.isLoggedin,
+        isAdmin: req.session.isAdmin
       });
     })
     .catch(err => {
@@ -76,41 +83,56 @@ module.exports.registerUser = (req, res, next) => {
 };
 
 module.exports.getLogin = (req, res, next) => {
-  req.session.isLoggedin = true;
-  res.redirect("/");
-  // const email = req.body.email;
-  // const pass = req.body.password;
-  // Users.getUser(email, pass)
-  //   .then(result => {
-  //     return bcrypt.compare(pass, result.password);
-  //   })
-  //   .then(isMatch => {
-  //     if (isMatch) {
-  //       res.setHeader('Set-Cookie', 'isLoggedin=true');
-  //       console.log("success =>" + isMatch);
-  //       res.status(200).render("Main/main", {
-  //         pageTitle: "Main",
-  //         path: "/",
-  //         result: auth,
-  //         message: `Welocome ${auth.email}`
-  //       });
-  //     }
-  //     if (!auth) {
-  //       res.render("forms/login", {
-  //         pageTitle: "Login",
-  //         path: "/form/login",
-  //         message: "Invalid email or password"
-  //       });
-  //     }
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //     res.render("forms/login", {
-  //       pageTitle: "Login",
-  //       path: "/form/login",
-  //       message: "E-mail id doesnt exist"
-  //     });
-  //   });
+  const email = req.body.email;
+  const pass = req.body.password;
+  let error = validationResult(req);
+  if (!error.isEmpty()) {
+    res.status(422).render("forms/login", {
+      pageTitle: "Log in",
+      path: "/signin",
+      message: error.array()[0].msg,
+      isAuthenticated: req.session.isLoggedin,
+      isAdmin: req.session.isAdmin
+    });
+  }
+  let isAdmin;
+  Users.getUser(email, pass)
+    .then(result => {
+      isAdmin = Boolean(result.hasOwnProperty("isAdmin"));
+      console.log("isadmin->" + isAdmin);
+      return bcrypt.compare(pass, result.password);
+    })
+    .then(isMatch => {
+      if (isMatch) {
+        console.log("nested isad" + isAdmin);
+        if (isAdmin) {
+          req.session.isAdmin = isAdmin;
+        }
+        // res.setHeader("Set-Cookie", "isLoggedin=true");
+        req.session.isLoggedin = true;
+        console.log("success =>" + isMatch);
+        res.status(200).render("Main/main", {
+          pageTitle: "Main",
+          path: "/",
+          result: isMatch,
+          message: `Welocome ${isMatch.email}`,
+          isAuthenticated: req.session.isAuthenticated,
+          isAdmin: req.session.isAdmin
+        });
+      }
+      if (!isMatch) {
+        res.render("forms/login", {
+          pageTitle: "Login",
+          path: "/form/login",
+          message: "Invalid email or password",
+          isAuthenticated: req.session.isLoggedin,
+          isAdmin: req.session.isAdmin
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
 
 module.exports.getIndex = (req, res, next) => {
@@ -122,7 +144,8 @@ module.exports.getIndex = (req, res, next) => {
         result: product,
         edit: false,
         message: `Welocome to CARTvmr`,
-        isAuthenticated: Boolean(req.session.isLoggedin)
+        isAuthenticated: req.session.isLoggedin,
+        isAdmin: req.session.isAdmin
       });
     })
     .catch(err => {
@@ -137,6 +160,7 @@ module.exports.get404 = (req, res, next) => {
   res.status(404).render("404", {
     pageTitle: "Page not found",
     path: "/something",
-    isAuthenticated: Boolean(req.session.isLoggedin)
+    isAuthenticated: req.session.isLoggedin,
+    isAdmin: req.session.isAdmin
   });
 };

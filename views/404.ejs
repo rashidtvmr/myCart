@@ -2,8 +2,8 @@
     <link rel="stylesheet" href="/css/404.css">
     </head>
 
-    <body>
-        <%- include('include/navbar.ejs',{path:path,isAuthenticated}) %>
+    <body style="margin-top: 60px">
+        <%- include('include/navbar.ejs',{path:path,isAuthenticated:isAuthenticated,isAdmin:isAdmin}) %>
         <h1>404 Error Page</h1>
         <section class="error-container">
             <span>4</span>

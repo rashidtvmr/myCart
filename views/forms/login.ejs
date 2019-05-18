@@ -3,7 +3,7 @@
 </head>
 
 <body>
-    <%- include('../include/navbar.ejs',{path:path,isAuthenticated:isAuthenticated}) %>
+    <%- include('../include/navbar.ejs',{path:path,isAuthenticated:isAuthenticated,isAdmin:isAdmin}) %>
     <div class="container">
         <div class="row">
             <div
@@ -11,7 +11,7 @@
                 <form name="login" action="/login" method="POST">
                     <p class="font-weight-bolder text-light">Login</p>
                     <%if (message){%>
-                    <div class="alert-sm "><%=mesaage%></div><%}%>
+                    <div class="alert-sm "><%=message%></div><%}%>
                     <div class="mt-5 mx-3 mx-md-5">
                         <div class="forEmail shadow-lg">
                             <i class="fas fa-envelope"></i>
@@ -38,7 +38,7 @@
     </div>
     <script src="/js/main.js"></script>
     <script>
-        typeIt("Login", output, 200);
+        typeIt("Login", output, 100);
         const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
         const passwordPattern = /^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/;
         let emailAlert = document.querySelector('.email-alert');

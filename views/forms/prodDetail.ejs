@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/css/prod-detail.css">
 
 <body style="text-align:center">
-    <%- include('../include/navbar.ejs',{path:path,isAuthenticated:isAuthenticated})%>
+    <%- include('../include/navbar.ejs',{path:path,isAuthenticated:isAuthenticated,isAdmin:isAdmin})%>
     <div class="container">
         <h3><%=product.title %></h3>
         <div><img class="prod-det-img img-fluid" src="<%= product.imgUrl %>">
@@ -15,7 +15,7 @@
     <script src="/js/main.js"></script>
     <script>
         let output = document.getElementById("output");
-        typeIt("<%= product.title %>", output, 200); //(string,targetElement,time(in sec))
+        typeIt("<%= product.title %>", output, 100); //(string,targetElement,time(in sec))
     </script>
     <%- include('../include/footer.ejs')%>
 </body>

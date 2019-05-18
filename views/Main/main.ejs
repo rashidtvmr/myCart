@@ -2,12 +2,13 @@
 <link rel="stylesheet" href="/css/main.css">
 </head>
 
-<body>
-    <%- include('../include/navbar.ejs')%>
+<body style="margin-top:70px">
+    <%- include('../include/navbar.ejs',{pageTitle:pageTitle,isAuthenticated:isAuthenticated,isAdmin:isAdmin})%>
     <p>Inside Main</p>
     <div class="grid">
         <div class="card">
             <p><%=result%></p>
         </div>
     </div>
+    <script src="/js/main.js"></script>
     <%- include('../include/footer.ejs')%>

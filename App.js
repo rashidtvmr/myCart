@@ -49,6 +49,7 @@ app.use(
   "/signup",
   body("email")
     .trim()
+    .not()
     .isEmail()
     .withMessage("Invalid E-mail")
     .normalizeEmail()
@@ -66,12 +67,26 @@ app.use(
         });
     }),
   body("password", "Invalid Password,Password must be alpha numeric")
-    .not()
     .trim()
+    .not()
+    .isEmpty()
     .isLength({ min: 6, max: 16 }),
   controller.registerUser
 );
-app.post("/login", controller.getLogin);
+app.post(
+  "/login",
+  [
+    body("email", "Invalid E-mail")
+      .trim()
+      .isEmail()
+      .normalizeEmail(),
+    body("password", "Password should not be empty")
+      .trim()
+      .isLength({ min: 6, max: 20 })
+      .withMessage("Password SHould be minimum 6 character")
+  ],
+  controller.getLogin
+);
 
 // app.use("/cart", cartRouter);
 

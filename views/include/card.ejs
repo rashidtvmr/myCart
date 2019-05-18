@@ -8,7 +8,7 @@
     </div>
     <div><span>Price :<i class="fas fa-rupee-sign" style="font-size:10px"></i> <%= product.price%></span></div>
 
-    <% if(edit){ %>
+    <% if(isAdmin){ %>
     <form method="POST" action="/admin/getEditForm/<%=product._id%>" style="display:inline-block">
         <input class="btn btn-primary m-1" type="submit" value="Edit" style="border-radius: 10px;">
     </form>
@@ -23,8 +23,10 @@
 
         <input class="btn btn-primary m-1" type="submit" value="Detail" style="border-radius: 10px;">
     </form>
+    <% if(isAuthenticated){ %>
     <form method="POST" action="/cart/addtocart/<%=product._id%>" style="display:inline-block">
         <input class="btn btn-primary m-1" type="submit" value="Add to Cart" style="border-radius: 10px;">
     </form>
+    <%}%>
     <%}%>
 </div>

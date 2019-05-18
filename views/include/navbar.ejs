@@ -18,11 +18,13 @@
                 <a class="nav-link" href="/form/signup">Sign Up</a>
             </li>
             <% }else if(isAuthenticated){%>
+            <%if(isAdmin){%>
             <li class="signup nav-item <%= (path=='/form/addprod')?'active':''%>">
                 <a class="nav-link" href="/form/addproduct">Add Product</a>
             </li>
             <li class="signup nav-item <%= (path=='/form/editprod')?'active':''%>">
                 <a class="nav-link" href="/admin/editPage">Edit Products</a>
+                <%}%>
             <li class="signup nav-item <%= (path=='/form/editprod')?'active':''%>">
                 <a class="nav-link" href="/admin/getLogout">Logout</a>
             </li>
@@ -50,15 +52,17 @@
                     <li class="signup nav-item <%= (path=='/form/signup')?'active':''%>">
                         <a class="nav-link" href="/form/signup">Sign Up</a>
                     </li>
-                    <%}else{%>
+                    <%}else if(isAuthenticated){%>
+                    <%if(isAdmin){%>
                     <li class="signup nav-item <%= (path=='/form/addprod')?'active':''%>">
                         <a class="nav-link" href="/form/addproduct">Add Product</a>
                     </li>
                     <li class="signup nav-item <%= (path=='/form/editprod')?'active':''%>">
                         <a class="nav-link" href="/admin/editPage">Edit Products</a>
-                    </li>
+
+                    </li><%}%>
                     <li class="signup nav-item <%= (path=='/form/editprod')?'active':''%>">
-                        <a class="nav-link" href="/admin/getLogout">Logout</a>
+                    <a class="nav-link" href="/admin/getLogout">Logout</a>
                     </li>
                     <%}%>
                     </ul>

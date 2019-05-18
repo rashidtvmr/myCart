@@ -19,7 +19,7 @@ module.exports = class Product {
         return result;
       })
       .catch(err => {
-        console.log(err);
+        console.log("Error inside getById()" + err);
       });
   }
 
@@ -38,7 +38,7 @@ module.exports = class Product {
         return result;
       })
       .catch(err => {
-        console.log(err);
+        console.log("Error while saving in save()" + err);
       });
   }
   static deleteById(id) {
@@ -50,7 +50,7 @@ module.exports = class Product {
         return result;
       })
       .catch(err => {
-        console.log(err);
+        console.log("Error inside deleteById()" + err);
       });
   }
   static fetchAll() {
@@ -63,7 +63,7 @@ module.exports = class Product {
         return result;
       })
       .catch(err => {
-        console.log("Error while fetch all->" + err);
+        console.log("Error Inside fetchAll()->" + err);
       });
   }
 };

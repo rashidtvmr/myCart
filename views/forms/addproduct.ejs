@@ -6,7 +6,7 @@
 
 
 
-    <%- include('../include/navbar.ejs',{path:path,isAuthenticated:isAuthenticated}) %>
+    <%- include('../include/navbar.ejs',{path:path,isAuthenticated:isAuthenticated,isAdmin:isAdmin}) %>
     <div class="container">
         <div class="row">
             <div
@@ -50,6 +50,6 @@
     </div>
     <script src="/js/main.js"></script>
     <script>
-        typeIt("Add Your Product", output, 200);
+        typeIt("Add Your Product", output, 100);
     </script>
     <%- include('../include/footer.ejs') %>

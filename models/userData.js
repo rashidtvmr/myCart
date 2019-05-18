@@ -21,7 +21,7 @@ module.exports = class Users {
         return result;
       })
       .catch(err => {
-        console.log(err);
+        console.log("Error inside User registeration" + err);
       });
     // .then(result => {
     //   //  console.log("Updated user->" + result);
@@ -40,7 +40,6 @@ module.exports = class Users {
       .find({ email: email })
       .next()
       .then(result => {
-        console.log("result inside model->" + result);
         return result;
       })
       .catch(err => {
@@ -58,7 +57,7 @@ module.exports = class Users {
         return result;
       })
       .catch(err => {
-        console.log(err);
+        console.log("Error inside fetchAll() od User->" + err);
         throw err;
       });
   }
