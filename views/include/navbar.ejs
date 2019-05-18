@@ -10,45 +10,57 @@
             <li class="home nav-item <%= (path=='/')?'active':''%>">
                 <a class="nav-link" href="/">Home</a>
             </li>
+            <%if(!isAuthenticated){%>
             <li class="login nav-item <%= (path=='/form/login')?'active':''%>">
                 <a class="nav-link" href="/form/login">Login</a>
             </li>
             <li class="signup nav-item <%= (path=='/form/signup')?'active':''%>">
                 <a class="nav-link" href="/form/signup">Sign Up</a>
             </li>
+            <% }else if(isAuthenticated){%>
             <li class="signup nav-item <%= (path=='/form/addprod')?'active':''%>">
                 <a class="nav-link" href="/form/addproduct">Add Product</a>
             </li>
             <li class="signup nav-item <%= (path=='/form/editprod')?'active':''%>">
                 <a class="nav-link" href="/admin/editPage">Edit Products</a>
+            <li class="signup nav-item <%= (path=='/form/editprod')?'active':''%>">
+                <a class="nav-link" href="/admin/getLogout">Logout</a>
+            </li>
+            <%}%>   
             </li>
         </ul>
     </div>
 </nav>
 
 <%- include('backdrop.ejs')%>
-<div class="sidebar bg-dark shadow-lg" style="display:none">
+            <div class="sidebar bg-dark shadow-lg" style="display:none">
 
-    <div class="mb-5 p-1 " onclick="showSidebar()">
-        <a class="close badge badge-secondary">&times;</a>
-    </div>
-    <ul class="navbar-nav m-auto font-weight-bolder">
+                <div class="mb-5 p-1 " onclick="showSidebar()">
+                    <a class="close badge badge-secondary">&times;</a>
+                </div>
+                <ul class="navbar-nav m-auto font-weight-bolder">
 
-        <li class=" home nav-item <%= (path=='/')?'active':''%>">
-            <a class="nav-link" href="/">Home</a>
-        </li>
-        <li class="login nav-item <%= (path=='/form/login')?'active':''%>">
-            <a class="nav-link" href="/form/login">Login</a>
-        </li>
-        <li class="signup nav-item <%= (path=='/form/signup')?'active':''%>">
-            <a class="nav-link" href="/form/signup">Sign Up</a>
-        </li>
-        <li class="signup nav-item <%= (path=='/form/addprod')?'active':''%>">
-            <a class="nav-link" href="/form/addproduct">Add Product</a>
-        </li>
-        <li class="signup nav-item <%= (path=='/form/editprod')?'active':''%>">
-            <a class="nav-link" href="/admin/editPage">Edit Products</a>
-        </li>
-    </ul>
+                    <li class=" home nav-item <%= (path=='/')?'active':''%>">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <%if(!isAuthenticated){%>
+                    <li class="login nav-item <%= (path=='/form/login')?'active':''%>">
+                        <a class="nav-link" href="/form/login">Login</a>
+                    </li>
+                    <li class="signup nav-item <%= (path=='/form/signup')?'active':''%>">
+                        <a class="nav-link" href="/form/signup">Sign Up</a>
+                    </li>
+                    <%}else{%>
+                    <li class="signup nav-item <%= (path=='/form/addprod')?'active':''%>">
+                        <a class="nav-link" href="/form/addproduct">Add Product</a>
+                    </li>
+                    <li class="signup nav-item <%= (path=='/form/editprod')?'active':''%>">
+                        <a class="nav-link" href="/admin/editPage">Edit Products</a>
+                    </li>
+                    <li class="signup nav-item <%= (path=='/form/editprod')?'active':''%>">
+                        <a class="nav-link" href="/admin/getLogout">Logout</a>
+                    </li>
+                    <%}%>
+                    </ul>
 
-</div>
+                </div>

@@ -3,17 +3,18 @@
 </head>
 
 <body>
-    <%- include('../include/navbar.ejs',{path:path}) %>
-    <%if(message){%>
-    <div class="backdrop" style="display:block" id="loginBack" onclick="modelBackdropClicked(event)"></div>
-    <%- include('../include/model.ejs',{message:message})%>
-    <%}%>
+    <%- include('../include/navbar.ejs',{path:path,isAuthenticated:isAuthenticated}) %>
+
     <div class="container">
         <div class="row">
             <div
                 class="login-form d-flex flex-column justify-content-center offset-1 col-10 col-md-6 p-2 bg-dark offset-sm-1 offset-md-3 shadow">
                 <form method="POST" action="/signup" name="signup">
                     <p class="font-weight-bolder text-light">Register</p>
+                    <%if(message){%>
+                    <div class="alert-sm alert-warning badge-pill"><%=message%>
+                    </div>
+                    <%}%>
                     <div class="mt-5 mx-3 mx-md-5">
                         <div class="forEmail shadow-lg">
                             <i class="fas fa-envelope"></i>

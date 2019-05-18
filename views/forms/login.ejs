@@ -3,21 +3,15 @@
 </head>
 
 <body>
-    <%- include('../include/navbar.ejs',{path:path}) %>
-    <%if(message){%>
-    <div class="backdrop" style="display:block" id="loginBack" onclick="modelBackdropClicked(event)"></div>
-    <!-- <%- include('../include/backdrop.ejs') %> -->
-    <%- include('../include/model.ejs',{message:message})%>
-    <%}%>
+    <%- include('../include/navbar.ejs',{path:path,isAuthenticated:isAuthenticated}) %>
     <div class="container">
         <div class="row">
             <div
                 class="login-form d-flex flex-column justify-content-center offset-1 col-10 col-md-6 p-2 bg-dark offset-sm-1 offset-md-3 shadow-lg">
                 <form name="login" action="/login" method="POST">
                     <p class="font-weight-bolder text-light">Login</p>
-                    <% if(message){%>
-    <div class="email-alert alert-sm alert-danger"><%=message%></div>
-    <%}%>
+                    <%if (message){%>
+                    <div class="alert-sm "><%=mesaage%></div><%}%>
                     <div class="mt-5 mx-3 mx-md-5">
                         <div class="forEmail shadow-lg">
                             <i class="fas fa-envelope"></i>
@@ -51,8 +45,8 @@
         let passAlert = document.querySelector('.pass-alert');
         let emailBox = document.querySelector('.forEmail');
         let passwordBox = document.querySelector('.forPass');
-        let email= document.querySelector('.forEmail input');
-        let password= document.querySelector('.forPass input');
+        let email = document.querySelector('.forEmail input');
+        let password = document.querySelector('.forPass input');
         // let submitButton = document.querySelector('.submit-btn');
         let isValid = false;
         let isEmail = false;

@@ -4,6 +4,7 @@ module.exports = class Users {
   constructor(email, pass) {
     this.email = email;
     this.password = pass;
+    this.cart = [];
 
     // this.bcryptin();
   }

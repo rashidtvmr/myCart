@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/css/prod-detail.css">
 
 <body style="text-align:center">
-    <%- include('../include/navbar.ejs',{path:path})%>
+    <%- include('../include/navbar.ejs',{path:path,isAuthenticated:isAuthenticated})%>
     <div class="container">
         <h3><%=product.title %></h3>
         <div><img class="prod-det-img img-fluid" src="<%= product.imgUrl %>">

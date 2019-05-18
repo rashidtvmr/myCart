@@ -1,7 +1,12 @@
 const Product = require("../models/product");
 const ObjectId = require("mongodb").ObjectID;
-
+module.exports.getLogout = (req, res, next) => {
+  req.session.destroy();
+  res.redirect("/");
+};
 module.exports.postAddProduct = (req, res, next) => {
+  const isAuthenticated = req.get("Cookie").split(";")[1];
+  console.log("auth:" + isAuthenticated);
   console.log("Admin add pro", req);
   const title = req.body.title;
   const price = req.body.price;
@@ -38,7 +43,8 @@ module.exports.getEditProduct = (req, res, next) => {
           pageTitle: "Edit Product",
           path: "/",
           message: false,
-          prod: result
+          prod: result,
+          isAuthenticated: boolean(req.session.isLoggedin)
         });
       }
     })
@@ -62,7 +68,8 @@ module.exports.postEditProduct = (req, res, next) => {
         path: "/",
         result: [product],
         edit: false,
-        message: `Edited Product`
+        message: `Edited Product`,
+        isAuthenticated: boolean(req.session.isLoggedin)
       });
     })
     .catch(err => {
@@ -77,7 +84,8 @@ module.exports.getEditPage = (req, res, next) => {
         path: "/",
         result: product,
         edit: true,
-        message: `Welocome to CARTvmr`
+        message: `Welocome to CARTvmr`,
+        isAuthenticated: boolean(req.session.isLoggedin)
       });
     })
     .catch(err => {

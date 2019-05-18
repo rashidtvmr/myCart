@@ -47,7 +47,7 @@ showSidebar = () => {
 showAlert = (Box, Alert, formName) => {
   Alert.style.display = "block";
   Box.style.border = "1px solid red";
-  document[formName].submit.disabled = true;
+  // document[formName].submit.disabled = true;
 };
 hideAlert = (validator, Box, Alert) => {
   if (validator) {

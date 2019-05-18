@@ -6,12 +6,7 @@
 
 
 
-    <%- include('../include/navbar.ejs',{path:path}) %>
-    <%if(message){%>
-    <%- include('../include/backdrop.ejs') %>
-    <%- include('../include/model.ejs',{message:message})%>
-    <%}%>
-    <%- include('../include/backdrop.ejs') %>
+    <%- include('../include/navbar.ejs',{path:path,isAuthenticated:isAuthenticated}) %>
     <div class="container">
         <div class="row">
             <div
