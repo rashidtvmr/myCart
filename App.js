@@ -47,30 +47,28 @@ app.use("/admin", adminRoute);
 // app.use("/form/addproduct", controller.getAddProduct);
 app.use(
   "/signup",
-  [
-    body("email")
-      .trim()
-      .isEmail()
-      .withMessage("Invalid E-mail")
-      .normalizeEmail()
-      .custom(value => {
-        const myDb = getdb();
-        return myDb
-          .collection("New-Users")
-          .find({ email: value })
-          .next()
-          .then(result => {
-            console.log("E-mail exist->:" + result);
-            if (result) {
-              return Promise.reject("E-mail already exist");
-            }
-          });
-      }),
-    body("password", "Invalid Password,Password must be alpha numeric")
-      .not()
-      .trim()
-      .isLength({ min: 6, max: 16 })
-  ],
+  body("email")
+    .trim()
+    .isEmail()
+    .withMessage("Invalid E-mail")
+    .normalizeEmail()
+    .custom(value => {
+      const myDb = getdb();
+      return myDb
+        .collection("New-Users")
+        .find({ email: value })
+        .next()
+        .then(result => {
+          console.log("E-mail exist->:" + result);
+          if (result) {
+            return Promise.reject("E-mail already exist");
+          }
+        });
+    }),
+  body("password", "Invalid Password,Password must be alpha numeric")
+    .not()
+    .trim()
+    .isLength({ min: 6, max: 16 }),
   controller.registerUser
 );
 app.post("/login", controller.getLogin);

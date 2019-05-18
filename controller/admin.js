@@ -44,7 +44,7 @@ module.exports.getEditProduct = (req, res, next) => {
           path: "/",
           message: false,
           prod: result,
-          isAuthenticated: boolean(req.session.isLoggedin)
+          isAuthenticated: req.session.isLoggedin
         });
       }
     })
@@ -69,7 +69,7 @@ module.exports.postEditProduct = (req, res, next) => {
         result: [product],
         edit: false,
         message: `Edited Product`,
-        isAuthenticated: boolean(req.session.isLoggedin)
+        isAuthenticated: req.session.isLoggedin
       });
     })
     .catch(err => {
@@ -85,7 +85,7 @@ module.exports.getEditPage = (req, res, next) => {
         result: product,
         edit: true,
         message: `Welocome to CARTvmr`,
-        isAuthenticated: boolean(req.session.isLoggedin)
+        isAuthenticated: req.session.isLoggedin
       });
     })
     .catch(err => {
@@ -105,7 +105,8 @@ module.exports.getProductDetail = (req, res, next) => {
           pageTitle: result.title,
           path: "/",
           message: false,
-          product: result
+          product: result,
+          isAuthenticated: req.session.isLoggedin
         });
       }
     })
