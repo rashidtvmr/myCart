@@ -1,4 +1,6 @@
+const ObjectId = require("mongodb").ObjectID;
 const Users = require("../models/userData");
+
 const Product = require("../models/product");
 const { validationResult } = require("express-validator/check");
 const bcrypt = require("bcrypt");
@@ -203,4 +205,7 @@ module.exports.getProductDetail = (req, res, next) => {
     .catch(err => {
       console.log(err);
     });
+};
+module.exports.postAddtoCart = (req, res, next) => {
+  const id = req.params.prodId;
 };
