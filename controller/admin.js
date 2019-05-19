@@ -78,13 +78,27 @@ module.exports.postEditProduct = (req, res, next) => {
     });
 };
 module.exports.getEditPage = (req, res, next) => {
+  // Product.fetchAll()
+  //   .then(product => {
+  //     res.render("index", {
+  //       pageTitle: "carTVMR",
+  //       path: "/",
+  //       result: product,
+  //       edit: true,
+  //       message: `Welocome to CARTvmr`,
+  //       isAuthenticated: req.session.isLoggedin,
+  //       isAdmin: req.session.isAdmin
+  //     });
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //   });
   Product.fetchAll()
     .then(product => {
       res.render("index", {
         pageTitle: "carTVMR",
         path: "/",
         result: product,
-        edit: true,
         message: `Welocome to CARTvmr`,
         isAuthenticated: req.session.isLoggedin,
         isAdmin: req.session.isAdmin

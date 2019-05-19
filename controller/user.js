@@ -86,6 +86,7 @@ module.exports.getLogin = (req, res, next) => {
   const pass = req.body.password;
   let error = validationResult(req);
   if (!error.isEmpty()) {
+    console.log("validation error while login->" + error.array());
     res.status(422).render("forms/login", {
       pageTitle: "Log in",
       path: "/signin",
@@ -94,50 +95,53 @@ module.exports.getLogin = (req, res, next) => {
       isAdmin: req.session.isAdmin
     });
   }
-  let isAdmin;
-  Users.getUser(email, pass)
-    .then(result => {
-      if (result) {
-        isAdmin = Boolean(result.hasOwnProperty("isAdmin"));
-        console.log("isadmin->" + isAdmin);
-        bcrypt
-          .compare(pass, result.password)
-          .then(isMatch => {
-            if (isMatch) {
-              console.log("nested isad" + isAdmin);
-              if (isAdmin) {
-                req.session.isAdmin = isAdmin;
+  if (error.isEmpty()) {
+    let isAdmin;
+    Users.getUser(email, pass)
+      .then(result => {
+        if (result) {
+          isAdmin = Boolean(result.hasOwnProperty("isAdmin"));
+          console.log("isadmin->" + isAdmin);
+          bcrypt
+            .compare(pass, result.password)
+            .then(isMatch => {
+              if (isMatch) {
+                console.log("nested isad" + isAdmin);
+                if (isAdmin) {
+                  req.session.isAdmin = isAdmin;
+                }
+                // res.setHeader("Set-Cookie", "isLoggedin=true");
+                req.session.isLoggedin = true;
+                console.log("success =>" + isMatch);
+                res.redirect("/");
+                // res.status(200).render("Main/main", {
+                //   pageTitle: "Main",
+                //   path: "/",
+                //   result: isMatch,
+                //   message: `Welocome ${isMatch.email}`,
+                //   isAuthenticated: req.session.isAuthenticated,
+                //   isAdmin: req.session.isAdmin
+                // });
               }
-              // res.setHeader("Set-Cookie", "isLoggedin=true");
-              req.session.isLoggedin = true;
-              console.log("success =>" + isMatch);
-              res.status(200).render("Main/main", {
-                pageTitle: "Main",
-                path: "/",
-                result: isMatch,
-                message: `Welocome ${isMatch.email}`,
-                isAuthenticated: req.session.isAuthenticated,
-                isAdmin: req.session.isAdmin
-              });
-            }
-            if (!isMatch) {
-              res.render("forms/login", {
-                pageTitle: "Login",
-                path: "/form/login",
-                message: "Invalid email or password",
-                isAuthenticated: req.session.isLoggedin,
-                isAdmin: req.session.isAdmin
-              });
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      }
-    })
-    .catch(err => {
-      console.log(err);
-    });
+              if (!isMatch) {
+                res.render("forms/login", {
+                  pageTitle: "Login",
+                  path: "/form/login",
+                  message: "Invalid email or password",
+                  isAuthenticated: req.session.isLoggedin,
+                  isAdmin: req.session.isAdmin
+                });
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 };
 
 module.exports.getIndex = (req, res, next) => {
@@ -147,7 +151,6 @@ module.exports.getIndex = (req, res, next) => {
         pageTitle: "carTVMR",
         path: "/",
         result: product,
-        edit: false,
         message: `Welocome to CARTvmr`,
         isAuthenticated: req.session.isLoggedin,
         isAdmin: req.session.isAdmin

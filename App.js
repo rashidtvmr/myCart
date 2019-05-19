@@ -81,11 +81,11 @@ app.post(
       .normalizeEmail(),
     body("password")
       .trim()
-      .isLength({ min: 6, max: 20 })
-      .withMessage("Password Should be minimum 6 character")
       .not()
       .isEmpty()
       .withMessage("Password Should not be empty")
+      .isLength({ min: 6, max: 20 })
+      .withMessage("Password Should be minimum 6 character")
   ],
   controller.getLogin
 );

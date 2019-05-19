@@ -5,12 +5,12 @@
     <%- include('../include/navbar.ejs',{path:path,isAuthenticated:isAuthenticated,isAdmin:isAdmin})%>
     <div class="container">
         <h3><%=product.title %></h3>
-        <div><img class="prod-det-img img-fluid" src="<%= product.imgUrl %>">
+        <div><img class="prod-det-img img-fluid w-100 img-thumbnail" src="<%= product.imgUrl %>">
         </div>
-        <h1>Price(in <i class="fas fa-rupee-sign"></i>) : <%= product.price %></h1>
-        <div>
-            <p><%= product.desc %></p>
-        </div>
+        <h3>Price : <i class="fas fa-rupee-sign" style="font-size: 20px"></i> <%= product.price %></h1>
+            <div>
+                <p><%= product.desc %></p>
+            </div>
     </div>
     <script src="/js/main.js"></script>
     <script>
