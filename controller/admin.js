@@ -1,9 +1,6 @@
 const Product = require("../models/product");
 const ObjectId = require("mongodb").ObjectID;
-module.exports.getLogout = (req, res, next) => {
-  req.session.destroy();
-  res.redirect("/");
-};
+
 module.exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
   const price = req.body.price;
@@ -110,27 +107,6 @@ module.exports.getEditPage = (req, res, next) => {
 };
 
 // adminController.getProductDetail;
-module.exports.getProductDetail = (req, res, next) => {
-  const id = req.params.prodId;
-  console.log("detail for->" + id);
-  Product.getById(id)
-    .then(result => {
-      console.log("res inside admin contr->" + result);
-      if (result) {
-        res.render("forms/prodDetail.ejs", {
-          pageTitle: result.title,
-          path: "/",
-          message: false,
-          product: result,
-          isAuthenticated: req.session.isLoggedin,
-          isAdmin: req.session.isAdmin
-        });
-      }
-    })
-    .catch(err => {
-      console.log(err);
-    });
-};
 
 module.exports.postDeleteProduct = (req, res, next) => {
   const id = req.params.prodId;
@@ -142,4 +118,13 @@ module.exports.postDeleteProduct = (req, res, next) => {
     .catch(err => {
       console.log(err);
     });
+};
+module.exports.getAddProduct = (req, res, next) => {
+  res.render("forms/addproduct", {
+    pageTitle: "Product Add",
+    path: "/form/addprod",
+    message: false,
+    isAuthenticated: req.session.isLoggedin,
+    isAdmin: req.session.isAdmin
+  });
 };

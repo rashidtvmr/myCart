@@ -22,16 +22,6 @@ module.exports.getSignupForm = (req, res, next) => {
   });
 };
 
-module.exports.getAddProduct = (req, res, next) => {
-  res.render("forms/addproduct", {
-    pageTitle: "Product Add",
-    path: "/form/addprod",
-    message: false,
-    isAuthenticated: req.session.isLoggedin,
-    isAdmin: req.session.isAdmin
-  });
-};
-
 module.exports.registerUser = (req, res, next) => {
   const email = req.body.email;
   let pass = req.body.password;
@@ -97,8 +87,10 @@ module.exports.getLogin = (req, res, next) => {
   }
   if (error.isEmpty()) {
     let isAdmin;
+    let user;
     Users.getUser(email, pass)
       .then(result => {
+        user = result;
         if (result) {
           isAdmin = Boolean(result.hasOwnProperty("isAdmin"));
           console.log("isadmin->" + isAdmin);
@@ -109,11 +101,26 @@ module.exports.getLogin = (req, res, next) => {
                 console.log("nested isad" + isAdmin);
                 if (isAdmin) {
                   req.session.isAdmin = isAdmin;
+                  req.session.user = user;
                 }
                 // res.setHeader("Set-Cookie", "isLoggedin=true");
                 req.session.isLoggedin = true;
                 console.log("success =>" + isMatch);
-                res.redirect("/");
+                Product.fetchAll()
+                  .then(product => {
+                    res.render("index", {
+                      pageTitle: "carTVMR",
+                      path: "/",
+                      result: product,
+                      message: `Welocome to CARTvmr`,
+                      isAuthenticated: req.session.isLoggedin,
+                      isAdmin: req.session.isAdmin
+                    });
+                  })
+                  .catch(err => {
+                    console.log(err);
+                  });
+                // res.redirect("/");
                 // res.status(200).render("Main/main", {
                 //   pageTitle: "Main",
                 //   path: "/",
@@ -171,4 +178,29 @@ module.exports.get404 = (req, res, next) => {
     isAuthenticated: req.session.isLoggedin,
     isAdmin: req.session.isAdmin
   });
+};
+module.exports.getLogout = (req, res, next) => {
+  req.session.destroy();
+  res.redirect("/");
+};
+module.exports.getProductDetail = (req, res, next) => {
+  const id = req.params.prodId;
+  console.log("detail for->" + id);
+  Product.getById(id)
+    .then(result => {
+      console.log("res inside admin contr->" + result);
+      if (result) {
+        res.render("forms/prodDetail.ejs", {
+          pageTitle: result.title,
+          path: "/",
+          message: false,
+          product: result,
+          isAuthenticated: req.session.isLoggedin,
+          isAdmin: req.session.isAdmin
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
