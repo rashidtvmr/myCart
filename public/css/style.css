@@ -1,6 +1,7 @@
 * {
     font-family: 'Stylish', sans-serif;
     box-sizing: border-box;
+    font-weight: bold;
 }
 
 body {
@@ -80,6 +81,13 @@ body {
     z-index: 100;
 }
 
+.cartItem {
+    border-radius: 20px;
+    padding: 6px;
+    width: 90%;
+    margin: 2% 5%;
+}
+
 .card {
 
     display: block;
@@ -97,6 +105,13 @@ body {
 }
 
 @media(min-width:40rem) {
+    .cartItem {
+        border-radius: 20px;
+        padding: 6px;
+        width: 50%;
+        margin: 2% auto;
+    }
+
     .card {
         margin: 1%;
 

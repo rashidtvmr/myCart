@@ -4,7 +4,7 @@ module.exports = class Users {
   constructor(email, pass) {
     this.email = email;
     this.password = pass;
-    this.cart = [];
+    this.cart = { items: [] };
 
     // this.bcryptin();
   }
@@ -46,20 +46,84 @@ module.exports = class Users {
         return err;
       });
   }
-  static fetchUsers() {
+  static findById(id) {
     const myDb = getdb();
     return myDb
       .collection("New-Users")
-      .find()
-      .toArray()
+      .find({ _id: id })
+      .next()
       .then(result => {
-        // console.log("From fetch all->" + result);
+        console.log("user found:" + result);
         return result;
       })
       .catch(err => {
-        console.log("Error inside fetchAll() od User->" + err);
-        throw err;
+        return err;
       });
+  }
+  static addToCart(id, user) {
+    var currentCart;
+    let newQuantity = 1;
+    const myDb = getdb();
+    currentCart = { ...user.cart };
+    const index = currentCart.items.findIndex(c => {
+      return c._id.toString() === id.toString();
+    });
+    console.log("index", index);
+    if (index >= 0) {
+      newQuantity = currentCart.items[index].quantity + 1;
+      currentCart.items[index].quantity = newQuantity;
+    } else {
+      currentCart.items.push({ _id: id, quantity: 1 });
+    }
+    return myDb.collection("New-Users").updateOne(
+      { _id: user._id },
+      {
+        $set: {
+          cart: currentCart
+        }
+      }
+    );
+  }
+  // static fetchUsers() {
+  //   const myDb = getdb();
+  //   return myDb
+  //     .collection("New-Users")
+  //     .find()
+  //     .toArray()
+  //     .then(result => {
+  //       // console.log("From fetch all->" + result);
+  //       return result;
+  //     })
+  //     .catch(err => {
+  //       console.log("Error inside fetchAll() od User->" + err);
+  //       throw err;
+  //     });
+  // }
+  static removeCartItem(id, user) {
+    var currentCart;
+    let newQuantity = 1;
+    const myDb = getdb();
+    currentCart = { ...user.cart };
+    const index = currentCart.items.findIndex(c => {
+      return c._id.toString() === id.toString();
+    });
+    console.log("index", index);
+    if (index >= 0) {
+      newQuantity = currentCart.items[index].quantity - 1;
+      if (newQuantity == 0) {
+        currentCart.items.splice(index, 1);
+      } else {
+        currentCart.items[index].quantity = newQuantity;
+      }
+    }
+    return myDb.collection("New-Users").updateOne(
+      { _id: user._id },
+      {
+        $set: {
+          cart: currentCart
+        }
+      }
+    );
   }
 };
 

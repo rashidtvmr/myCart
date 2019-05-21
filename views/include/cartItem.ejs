@@ -1,0 +1,13 @@
+<div class="cartItem shadow border">
+    <div>
+        <p><b><%=prod.title%></b></p>
+        <hr>
+        <p>Price:<%=prod.price%></p>
+        <p>Quantity:<span class="badge badge-secondary"><%=prod.quantity%></span></p>
+        <p>Total Price:<b class=" badge badge-secondary"><%=(prod.price * prod.quantity)%></b></p>
+    </div>
+
+    <form action='/user/removeItem/<%=prod._id%>' method="POST">
+        <input type="submit" class="btn btn-warning" value='Remove'>
+    </form>
+</div>

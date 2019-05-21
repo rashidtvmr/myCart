@@ -1,0 +1,29 @@
+<%- include('../include/header.ejs',{pageTitle:pageTitle})%>
+
+<body style="text-align:center">
+    <%- include('../include/navbar.ejs',{path:path,isAuthenticated:isAuthenticated,isAdmin:isAdmin})%>
+    <div class="container-fluid">
+
+        <div class="cart shadow-sm border rounded-lg">
+            <% if(product.length==0){%>
+            <p><%=message%></p>
+            <%}else{%>
+
+            <p><%=message%></p>
+            <% product.forEach(prod=>{%><%- include('../include/cartItem.ejs',{prod:prod})%><%});%>
+            <%}%>
+            <%if(canOrder){%>
+
+            <form action="/user/order" method="POST">
+                <input type="submit" value="Order" class="btn btn-success badge-pill px-4 font-weight-bold">
+            </form>
+            <%}%>
+        </div>
+    </div>
+    <script src="/js/main.js"></script>
+    <script>
+        let output = document.getElementById("output");
+        typeIt("Main Menu", output, 100); //(string,targetElement,time(in sec))
+    </script>
+    <%- include('../include/footer.ejs')%>
+</body>

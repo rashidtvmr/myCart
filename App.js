@@ -10,7 +10,7 @@ const getdb = require("./data/User").getdb;
 const PORT = process.env.PORT || 8080;
 const URI =
   "mongodb+srv://rashidtvmr:Mass94877348@mycluster-ztbvh.mongodb.net/myDb";
-
+const localURI = "mongodb://localhost:27017/myDb";
 app.set("view engine", "ejs");
 app.set("views", "views");
 
@@ -36,7 +36,7 @@ const controller = require("./controller/user");
 //const Data = signup.Data;
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 app.use(express.static("./public"));
 
 ///form/getprod/:prodId
@@ -53,7 +53,7 @@ app.get("/", controller.getIndex);
 app.use(controller.get404);
 
 dbConnect(() => {
-  // console.log("DB inside App.js");
+  console.log("DB inside App.js", localURI);
 });
 app.listen(PORT, () => {
   console.log(`Listening on PORT:${PORT}`);

@@ -1,13 +1,14 @@
 const mongoClient = require("mongodb").MongoClient;
 let _db;
+const URI =
+  "mongodb+srv://rashidtvmr:Mass94877348@mycluster-ztbvh.mongodb.net/";
+const localURI = "mongodb://localhost:27017";
 module.exports.dbConnect = () => {
+  console.log("localURI", localURI);
   mongoClient
-    .connect(
-      "mongodb+srv://rashidtvmr:Mass94877348@mycluster-ztbvh.mongodb.net/"
-    )
+    .connect(URI)
     .then(client => {
       _db = client.db("myDb");
-      console.log("connected to _db->" + client.db("myDb"));
     })
     .catch(err => {
       console.log(err);

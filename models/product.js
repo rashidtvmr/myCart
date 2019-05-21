@@ -53,6 +53,21 @@ module.exports = class Product {
         console.log("Error inside deleteById()" + err);
       });
   }
+  static getCartItems(prodArray) {
+    const myDb = getdb();
+    return myDb
+      .collection("product")
+      .find({ _id: { $in: prodArray } })
+      .toArray()
+      .then(result => {
+        // console.log(result);
+        return result;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   static fetchAll() {
     const myDb = getdb();
     return myDb
