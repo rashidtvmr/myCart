@@ -2,14 +2,15 @@
 
 <body style="text-align:center">
     <%- include('include/navbar.ejs',{path:path,isAuthenticated:isAuthenticated,isAdmin:isAdmin})%>
+    <%if (message){%>
+    <span class="alert alert-success"><%=message%></span>
+    <%}%>
     <div class="container-fluid">
-        <%if (message){%>
-        <span class="alert alert-success"><%=message%></span>
-        <%}%>
+        
 
         <% result.forEach(prod=>{  %>
-        <%- include('include/card.ejs',{product:prod,isAuthenticated:isAuthenticated,isAdmin:isAdmin})%>
-        <% }); %>
+    <%- include('include/card.ejs',{product:prod,isAuthenticated:isAuthenticated,isAdmin:isAdmin})%>
+    <% }); %>
     </div>
     <script src="/js/main.js"></script>
     <script>

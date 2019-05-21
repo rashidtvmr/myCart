@@ -81,7 +81,6 @@ module.exports.getLogin = (req, res, next) => {
   const pass = req.body.password;
   let error = validationResult(req);
   if (!error.isEmpty()) {
-    console.log("validation error while login->" + error.array());
     res.status(422).render("forms/login", {
       pageTitle: "Log in",
       path: "/signin",
@@ -196,7 +195,6 @@ module.exports.getLogout = (req, res, next) => {
 };
 module.exports.getProductDetail = (req, res, next) => {
   const id = req.params.prodId;
-  console.log("detail for->" + id);
   Product.getById(id)
     .then(result => {
       console.log("res inside admin contr->" + result);

@@ -88,6 +88,11 @@ body {
     margin: 2% 5%;
 }
 
+.cart {
+    width: 95%;
+    margin: 2.5%;
+}
+
 .card {
 
     display: block;
@@ -104,12 +109,18 @@ body {
     height: 210px;
 }
 
-@media(min-width:40rem) {
+@media(min-width:50rem) {
+    .cart {
+        width: 80%;
+        margin: 1% 10%;
+    }
+
     .cartItem {
         border-radius: 20px;
         padding: 6px;
-        width: 50%;
-        margin: 2% auto;
+        width: 40%;
+        margin: 0.5%;
+        display: inline-block;
     }
 
     .card {

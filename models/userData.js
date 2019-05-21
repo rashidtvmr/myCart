@@ -107,7 +107,7 @@ module.exports = class Users {
     const index = currentCart.items.findIndex(c => {
       return c._id.toString() === id.toString();
     });
-    console.log("index", index);
+
     if (index >= 0) {
       newQuantity = currentCart.items[index].quantity - 1;
       if (newQuantity == 0) {

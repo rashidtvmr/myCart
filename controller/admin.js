@@ -30,10 +30,8 @@ module.exports.postAddProduct = (req, res, next) => {
 };
 module.exports.getEditProduct = (req, res, next) => {
   const id = req.params.id;
-  console.log("Searching for->" + id);
   Product.getById(id)
     .then(result => {
-      console.log("res inside admin contr->" + result);
       if (result) {
         res.render("forms/editprod.ejs", {
           pageTitle: "Edit Product",
@@ -96,7 +94,7 @@ module.exports.getEditPage = (req, res, next) => {
         pageTitle: "carTVMR",
         path: "/",
         result: product,
-        message: `Welocome to CARTvmr`,
+        message: `Welcome Admin@${req.session.user.email}`,
         isAuthenticated: req.session.isLoggedin,
         isAdmin: req.session.isAdmin
       });

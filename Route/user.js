@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const controller = require("../controller/user");
 const getdb = require("../data/User").getdb;
+const userAUth = require("../middleware/user-auth");
 // const adminController = require("../controller/admin");
 const { body } = require("express-validator/check");
-router.post("/order", controller.postOrder);
+router.post("/order", userAUth, controller.postOrder);
 router.post(
   "/signup",
   body("email")
@@ -51,17 +52,17 @@ router.post(
 );
 
 // /user/getCart
-router.get("/getcart", controller.getCart);
+router.get("/getcart", userAUth, controller.getCart);
 
-router.get("/getLogout", controller.getLogout);
+router.get("/getLogout", userAUth, controller.getLogout);
 
 router.get("/getprod/:prodId", controller.getProductDetail);
 
 ///user/addtocart/<%=product._id%>
 
-router.post("/addtocart/:prodId", controller.postAddtoCart);
+router.post("/addtocart/:prodId", userAUth, controller.postAddtoCart);
 ///user/removeItem/<%=prod._id%>
-router.post("/removeItem/:prodId", controller.postRemoveItem);
+router.post("/removeItem/:prodId", userAUth, controller.postRemoveItem);
 ///user/getCart
 
 module.exports = router;
