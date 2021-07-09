@@ -1,10 +1,9 @@
 const mongoClient = require("mongodb").MongoClient;
 let _db;
 const URI =
-  "mongodb+srv://rashidtvmr:Mass94877348@mycluster-ztbvh.mongodb.net/";
+  process.env.MONGODB_ATLAS_URI
 const localURI = "mongodb://localhost:27017";
 module.exports.dbConnect = () => {
-  console.log("localURI", localURI);
   mongoClient
     .connect(URI)
     .then(client => {

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const dbConnect = require("./data/User").dbConnect;
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -8,9 +9,7 @@ const MongodbSession = require("connect-mongodb-session")(session);
 
 const getdb = require("./data/User").getdb;
 const PORT = process.env.PORT || 8080;
-const URI =
-  "mongodb+srv://rashidtvmr:Mass94877348@mycluster-ztbvh.mongodb.net/myDb";
-const localURI = "mongodb://localhost:27017/myDb";
+const URI = process.env.MONGODB_ATLAS_URI;
 app.set("view engine", "ejs");
 app.set("views", "views");
 
@@ -53,7 +52,7 @@ app.get("/", controller.getIndex);
 app.use(controller.get404);
 
 dbConnect(() => {
-  console.log("DB inside App.js", localURI);
+  console.log("DB inside App.js", URI);
 });
 app.listen(PORT, () => {
   console.log(`Listening on PORT:${PORT}`);
